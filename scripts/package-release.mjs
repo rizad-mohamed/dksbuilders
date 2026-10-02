@@ -1,0 +1,11 @@
+import {execFileSync} from 'node:child_process';
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+const source=process.env.GITHUB_SHA||process.env.SOURCE_COMMIT||execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim();
+if(!/^[a-f0-9]{40}$/.test(source))throw Error('An exact source commit SHA is required');
+await mkdir('release-output',{recursive:true});
+await writeFile('release-output/SOURCE_COMMIT.txt',source+'\n');
+execFileSync('tar',['-czf','release-output/dks-builders.tar.gz','dist','.openai/hosting.json','-C','release-output','SOURCE_COMMIT.txt']);
+const digest=createHash('sha256').update(await readFile('release-output/dks-builders.tar.gz')).digest('hex');
+await writeFile('release-output/dks-builders.tar.gz.sha256',digest+'  dks-builders.tar.gz\n');
+console.log('Packaged validated static assets with source SHA and SHA-256 checksum.');

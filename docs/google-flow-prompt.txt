@@ -1,0 +1,41 @@
+GOOGLE FLOW — DKS BUILDERS CINEMATIC HERO
+COPY-READY GENERATION PROMPT
+
+Create a photorealistic, approximately 10-second, seamless-loop cinematic montage for a premium Sri Lankan construction and civil-engineering website. This is an illustrative brand film, not documentation of real DKS Builders projects, staff or owned machinery. No branding is visible in the footage.
+
+Deliver a coherent eight-shot sequence in 16:9 landscape at the highest practical native quality, composed for a website background. Use restrained, premium commercial-film cinematography: smooth drone and gimbal movement, natural tropical late-afternoon light, believable atmospheric depth, controlled lens flare, realistic motion blur, selective cinematic depth of field and consistent warm amber/charcoal/steel-blue grading. Make it feel like one production filmed across Sri Lanka, not a collage of unrelated foreign stock clips. Keep motion calm within each brief shot; use clean match cuts on structural lines, camera direction and light. No rapid strobing, flashing, chaotic speed ramps or spinning cameras.
+
+COMPOSITION
+Keep the most visually important construction activity in the central/right 60% of the frame. Leave a relatively quiet, darker lower-left and central-left area for large white website typography. Maintain readable silhouettes and midtones beneath an eventual dark overlay. Keep important action in a central safe zone so the montage also crops cleanly to 4:5 and 9:16. No text needs to be generated in the picture. Avoid a strong sun flare or bright sky directly behind the left-side headline area.
+
+EXACT SHOT PLAN — TOTAL TARGET 10.0 SECONDS
+
+0.00–1.35s | SHOT 1 — SCALE / BUILDING CONSTRUCTION
+A slow aerial approach toward a substantial, physically plausible concrete institutional or commercial building under construction in a Sri Lankan semi-urban setting. Clear columns, slabs and orderly scaffolding; tropical vegetation, locally plausible low-rise surroundings and realistic warm daylight. The opening composition is the reference pose to which the final shot returns.
+
+1.35–2.55s | SHOT 2 — HIGHWAY DELIVERY
+A low, smooth drone pass parallel to an active highway-construction zone. Realistic asphalt paving equipment and a roller moving at believable speed. Clearly separated pedestrian/work zones, correct worker PPE and orderly operation. Green Sri Lankan terrain and left-side traffic context where traffic is visible. No oversized foreign desert expressway.
+
+2.55–3.55s | SHOT 3 — ENGINEERING / PEOPLE
+A controlled gimbal close-up of two Sri Lankan engineers reviewing a paper plan at a site table. Natural skin tones, correct hard hats, high-visibility clothing and boots; realistic hands and five fingers, legible physical actions without generated readable text. Serious, attentive collaboration rather than posed smiling stock portraits. Focus briefly on the plan and measured gesture.
+
+3.55–4.55s | SHOT 4 — STRUCTURE / CRAFTSMANSHIP
+A precise macro-to-close construction detail: correctly tied reinforcement bars, clean formwork and a measured surveying/checking action. Rigid rebar, realistic materials and believable construction tolerances. Shallow depth of field, subtle movement and carefully controlled highlights. Show craftsmanship without sparks or unsafe work introduced only for spectacle.
+
+4.55–5.75s | SHOT 5 — BRIDGE INFRASTRUCTURE
+An elegant oblique tracking shot along a credible reinforced-concrete bridge over a tropical river. Plausible spans, columns, parapets and abutments; greenery, riverbanks and terrain consistent with Sri Lanka. The camera glides steadily, continuing the direction of motion from the preceding shot. No impossible suspension geometry or monumental foreign skyline.
+
+5.75–7.20s | SHOT 6 — WATER, SEWERAGE, IRRIGATION & DRAINAGE
+One deliberate infrastructure sequence using a gentle focus/angle change: a clean large water-supply valve and pipe assembly in a proper service chamber, a believable separated sewerage inspection line, then an engineered drainage/irrigation channel with a water-control gate and agricultural landscape in the background. Convey the connected water-management disciplines without combining potable-water and sewerage systems unsafely. Realistic water flow, pipe joints and concrete edges. No flooded worksite or fictional plumbing.
+
+7.20–8.40s | SHOT 7 — RESIDENTIAL CONSTRUCTION
+A short, composed lateral glide past a locally plausible premium two-storey Sri Lankan home nearing completion: concrete/plaster construction, shaded verandah, deep eaves, considered proportions and warm natural materials. Show finishing craftsmanship and a tidy site, with restrained tropical planting. No Dubai tower, European alpine chalet or implausible luxury mansion.
+
+8.40–10.00s | SHOT 8 — RETURN / SEAMLESS LOOP
+An aerial pullback/reframe returning to the building site and exact opening camera composition. Match lens, camera height, orientation, framing, lighting, machinery positions and direction of travel to the first frame. Ease the motion so the last frame and the first frame join without a visible jump, fade to black or title card. The loop should suggest continued construction progress rather than a film ending.
+
+REALISM AND NEGATIVE CONSTRAINTS
+Physically plausible Sri Lankan architecture, infrastructure, machinery and terrain. Correct engineering relationships and believable scale. Realistic PPE, natural human movement, stable skin tones and consistent weather/light. No unsafe worker behaviour, people under suspended loads, missing edge protection near visible workers, surreal imagery, impossible structures, bending machinery, morphing vehicles, duplicated people, floating objects, distorted faces, malformed hands, extra fingers, fake signage, text, subtitles, logos or watermarks. Silent visual film: no music, voiceover or dialogue. Avoid recognisable brands and claims about any actual completed project.
+
+FINISH
+A calm, premium, purposeful montage with eight clearly differentiated camera perspectives and a coherent visual identity. Communicate building construction, highway and bridge work, water supply, sewerage, irrigation/drainage and residential construction. Preserve visual breathing room for the website. Deliver a smooth approximately 10-second loop suitable for muted autoplay, rather than an advertisement with a narrative beginning/end.
