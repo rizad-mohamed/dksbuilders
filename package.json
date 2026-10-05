@@ -3,14 +3,14 @@
   "version": "2.0.0",
   "private": true,
   "engines": {
-    "node": ">=22"
+    "node": ">=22.19"
   },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "test": "playwright test",
     "test:e2e": "playwright test",
     "test:lighthouse": "node scripts/lighthouse.mjs",

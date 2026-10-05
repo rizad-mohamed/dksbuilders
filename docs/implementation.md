@@ -23,7 +23,7 @@ The obsolete preview-domain canonical, sitemap and structured-data URL are remov
 ## Motion and media
 
 - CSS: hero entry, navigation underline, button feedback and image hover.
-- Motion: visible-content viewport reveals, service-image transitions and modest image parallax.
+- Motion Mini: one observer progressively enhances server-rendered reveal wrappers, importing the animation engine only when needed. Native CSS handles service-image transitions and scroll-timeline parallax with static fallbacks.
 - Three.js: interactive Plan/Frame/Enclosure visualization in an isolated canvas with pointer response and a pause control.
 - Responsive film: retained local MP4 derivatives, loaded on user request; no autoplay download.
 - Reduced motion: static CSS, no parallax, optional 3D, paused active film when the preference changes.
