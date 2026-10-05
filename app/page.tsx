@@ -5,5 +5,14 @@ import { Projects } from "@/components/projects";
 import { Process } from "@/components/process";
 import { Contact } from "@/components/contact";
 export default function Home() {
-  return <main id="main"><Hero /><Company /><Services /><Projects /><Process /><Contact /></main>;
+  return (
+    <main id="main">
+      <Hero />
+      <Company />
+      <Services />
+      <Projects />
+      <Process />
+      <Contact />
+    </main>
+  );
 }

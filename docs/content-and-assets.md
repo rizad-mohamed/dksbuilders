@@ -1,3 +1,5 @@
+> Migration note: this original asset record is preserved for attribution. Assets formerly under dist/assets now live under public/assets. Obsolete static-build documents have been retired. Current behavior is documented in implementation.md and README.md.
+
 # Content inventory and provenance
 
 Inspected all four supplied screenshots before coding. They are content sources only; none of the old card layouts, stock staff portraits, yellow rounded modules, counters, reviews or section compositions were retained.

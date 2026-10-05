@@ -4,5 +4,110 @@ import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { partners } from "@/lib/content";
 import { Reveal, Parallax } from "./motion";
 export function Process() {
- return <><section id="approach" className="section process-section" aria-labelledby="process-title"><div className="wrap"><div className="process-grid"><Reveal className="process-intro"><div className="eyebrow"><span>05 /</span> OUR APPROACH</div><h2 id="process-title">Thought through.<br/>Built together.</h2><p>A clear path from your first conversation<br/>to the work on site.</p><Parallax className="process-photo"><Image src="/assets/craft-detail-1280.webp" fill sizes="(max-width: 767px) 100vw, 45vw" alt="Illustrative reinforcement and concrete formwork detail"/><span className="image-credit">Illustrative construction detail</span></Parallax></Reveal><ol className="process-list">{[{title:"Understand your vision.",copy:"Discuss your requirements, site and priorities with our team."},{title:"Make the plan clear.",copy:"Develop 2D and 3D plans to communicate the proposed work."},{title:"Define the scope.",copy:"Prepare a detailed estimate so you can assess construction requirements."},{title:"Bring it into reality.",copy:"Move from planning into construction with a coordinated team."}].map((item,i)=><li key={item.title}><span className="process-number">0{i+1}</span><Reveal delay={i*.05}><h3>{item.title}</h3><p>{item.copy}</p></Reveal></li>)}</ol></div><div className="partners"><div className="eyebrow">ACROSS PUBLIC INSTITUTIONS & PRIVATE ENTERPRISE</div><div className="partner-grid">{partners.map((partner,i)=><Image key={partner} src={`/assets/trusted-brand-${i+1}.webp`} width={106} height={79} alt={partner}/>)}</div></div></div></section><div className="wrap career-banner"><div className="career-copy"><div className="eyebrow">OUR PEOPLE</div><h2>Build your career with DKS.</h2><p>Different skills. A shared purpose.</p><Link className="text-link" href="/careers">Career opportunities<ArrowRightIcon size={16}/></Link></div><div className="career-image"><Image src="/assets/engineering-team-1280.webp" fill sizes="(max-width: 767px) 100vw, 45vw" alt="Illustrative engineers reviewing construction plans"/><span className="image-credit">Illustrative imagery · not DKS staff</span></div></div></>;
+  return (
+    <>
+      <section
+        id="approach"
+        className="section process-section"
+        aria-labelledby="process-title"
+      >
+        <div className="wrap">
+          <div className="process-grid">
+            <Reveal className="process-intro">
+              <div className="eyebrow">
+                <span>05 /</span> OUR APPROACH
+              </div>
+              <h2 id="process-title">
+                Thought through.
+                <br />
+                Built together.
+              </h2>
+              <p>
+                A clear path from your first conversation
+                <br />
+                to the work on site.
+              </p>
+              <Parallax className="process-photo">
+                <Image
+                  src="/assets/craft-detail-1280.webp"
+                  fill
+                  sizes="(max-width: 767px) 100vw, 45vw"
+                  alt="Illustrative reinforcement and concrete formwork detail"
+                />
+                <span className="image-credit">
+                  Illustrative construction detail
+                </span>
+              </Parallax>
+            </Reveal>
+            <ol className="process-list">
+              {[
+                {
+                  title: "Understand your vision.",
+                  copy: "Discuss your requirements, site and priorities with our team.",
+                },
+                {
+                  title: "Make the plan clear.",
+                  copy: "Develop 2D and 3D plans to communicate the proposed work.",
+                },
+                {
+                  title: "Define the scope.",
+                  copy: "Prepare a detailed estimate so you can assess construction requirements.",
+                },
+                {
+                  title: "Bring it into reality.",
+                  copy: "Move from planning into construction with a coordinated team.",
+                },
+              ].map((item, i) => (
+                <li key={item.title}>
+                  <span className="process-number">0{i + 1}</span>
+                  <Reveal delay={i * 0.05}>
+                    <h3>{item.title}</h3>
+                    <p>{item.copy}</p>
+                  </Reveal>
+                </li>
+              ))}
+            </ol>
+          </div>
+          <div className="partners">
+            <div className="eyebrow">
+              ACROSS PUBLIC INSTITUTIONS & PRIVATE ENTERPRISE
+            </div>
+            <div className="partner-grid">
+              {partners.map((partner, i) => (
+                <Image
+                  key={partner}
+                  src={`/assets/trusted-brand-${i + 1}.webp`}
+                  width={106}
+                  height={79}
+                  alt={partner}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+      <div className="wrap career-banner">
+        <div className="career-copy">
+          <div className="eyebrow">OUR PEOPLE</div>
+          <h2>Build your career with DKS.</h2>
+          <p>Different skills. A shared purpose.</p>
+          <Link className="text-link" href="/careers">
+            Career opportunities
+            <ArrowRightIcon size={16} />
+          </Link>
+        </div>
+        <div className="career-image">
+          <Image
+            src="/assets/engineering-team-1280.webp"
+            fill
+            sizes="(max-width: 767px) 100vw, 45vw"
+            alt="Illustrative engineers reviewing construction plans"
+          />
+          <span className="image-credit">
+            Illustrative imagery · not DKS staff
+          </span>
+        </div>
+      </div>
+    </>
+  );
 }
