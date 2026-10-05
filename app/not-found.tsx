@@ -1,0 +1,2 @@
+import { ComingSoon } from "@/components/coming-soon";
+export default function NotFound(){return <ComingSoon title="Page not found." copy="We couldn’t find this page. Return to the homepage to explore DKS Builders, our services and contact information."/>;}
