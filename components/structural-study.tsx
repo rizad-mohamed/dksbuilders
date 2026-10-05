@@ -16,6 +16,7 @@ export function StructuralStudy() {
     if (!host) return;
     let disposed = false;
     let starting = false;
+    let inView = false;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const connection = (
       navigator as Navigator & { connection?: { saveData?: boolean } }
@@ -23,6 +24,7 @@ export function StructuralStudy() {
     const observer = new IntersectionObserver(
       async (entries) => {
         const visible = entries[0].isIntersecting;
+        inView = visible;
         controller.current?.setVisible(visible);
         if (!visible || starting || controller.current) return;
         if (!enabled && (reduced.matches || connection?.saveData)) return;
@@ -33,6 +35,7 @@ export function StructuralStudy() {
           const scene = createStudy(host);
           controller.current = scene;
           scene.setPhase(phaseRef.current);
+          scene.setVisible(inView);
           scene.setRunning(!reduced.matches);
           setRunning(!reduced.matches);
           setLoaded(true);

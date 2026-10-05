@@ -433,7 +433,7 @@ summary:focus-visible {
   flex-shrink: 0;
   color: #38576c;
 }
-.sector h3 {
+.sector .sector-title {
   font-family: var(--serif);
   font-size: 24px;
   margin-bottom: 2px;
@@ -1044,7 +1044,7 @@ summary:focus-visible {
     padding: 0;
     border: 0;
   }
-  .sector h3 {
+  .sector .sector-title {
     font-size: 23px;
   }
   .sector p {
@@ -1222,5 +1222,50 @@ summary:focus-visible {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+}
+.parallax-inner {
+  position: absolute;
+  inset: -18px 0;
+}
+.service-frame {
+  position: absolute;
+  inset: 0;
+  animation: media-in 0.35s ease both;
+}
+@keyframes media-in {
+  from {
+    opacity: 0.65;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@supports (animation-timeline: view()) {
+  .parallax-media {
+    view-timeline: --photo block;
+  }
+  .parallax-inner {
+    animation: photo-parallax linear both;
+    animation-timeline: --photo;
+    animation-range: entry 0% exit 100%;
+  }
+  @keyframes photo-parallax {
+    from {
+      transform: translateY(-14px);
+    }
+    to {
+      transform: translateY(14px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .parallax-inner {
+    inset: 0;
+    transform: none;
+    animation: none;
+  }
+  .service-frame {
+    animation: none;
   }
 }

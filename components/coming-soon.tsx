@@ -9,7 +9,7 @@ export function ComingSoon({ title, copy }: { title: string; copy: string }) {
       <h1>{title}</h1>
       <p>{copy}</p>
       <div className="coming-actions">
-        <Link href="/" className="button">
+        <Link prefetch={false} href="/" className="button">
           Back to home
           <ArrowRightIcon size={17} />
         </Link>

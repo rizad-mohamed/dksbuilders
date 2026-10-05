@@ -56,8 +56,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-LK">
-      <body className={sans.variable + " " + serif.variable}>
+    <html lang="en-LK" className={sans.variable + " " + serif.variable}>
+      <body>
         <a className="skip-link" href="#main">
           Skip to content
         </a>

@@ -1,16 +1,22 @@
-import { spawn } from "node:child_process";
+import { spawn, execFile } from "node:child_process";
+import { promisify } from "node:util";
+import { createServer } from "node:net";
 import { mkdir, writeFile } from "node:fs/promises";
 import { chromium } from "@playwright/test";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
 
-const port = 3001;
+const probe = createServer();
+await new Promise((resolve) => probe.listen(0, "127.0.0.1", resolve));
+const port = probe.address().port;
+await new Promise((resolve) => probe.close(resolve));
 const origin = `http://localhost:${port}`;
 const server = spawn(
   process.execPath,
   ["node_modules/next/dist/bin/next", "start", "--port", String(port)],
   {
     stdio: ["ignore", "pipe", "pipe"],
+    detached: process.platform !== "win32",
   },
 );
 server.stdout.on("data", (chunk) => process.stdout.write(chunk));
@@ -101,6 +107,19 @@ try {
   );
 } finally {
   await browser?.kill();
-  server.kill();
+  if (server.pid) {
+    try {
+      if (process.platform === "win32")
+        await promisify(execFile)("taskkill.exe", [
+          "/PID",
+          String(server.pid),
+          "/T",
+          "/F",
+        ]);
+      else process.kill(-server.pid, "SIGTERM");
+    } catch {
+      /* The owned server may already have exited. */
+    }
+  }
 }
 if (failed) process.exitCode = 1;

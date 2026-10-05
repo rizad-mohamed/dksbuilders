@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
-import { Reveal, Parallax } from "./motion";
+import { Reveal } from "./motion";
+import { Parallax } from "./parallax";
 export function Projects() {
   return (
     <section
@@ -16,7 +17,7 @@ export function Projects() {
           </div>
           <h2 id="projects-title">Projects, in detail.</h2>
         </Reveal>
-        <Link href="/projects" className="text-link">
+        <Link prefetch={false} href="/projects" className="text-link">
           Project portfolio
           <ArrowRightIcon size={17} />
         </Link>

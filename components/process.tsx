@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { partners } from "@/lib/content";
-import { Reveal, Parallax } from "./motion";
+import { Reveal } from "./motion";
+import { Parallax } from "./parallax";
 export function Process() {
   return (
     <>
@@ -91,7 +92,7 @@ export function Process() {
           <div className="eyebrow">OUR PEOPLE</div>
           <h2>Build your career with DKS.</h2>
           <p>Different skills. A shared purpose.</p>
-          <Link className="text-link" href="/careers">
+          <Link prefetch={false} className="text-link" href="/careers">
             Career opportunities
             <ArrowRightIcon size={16} />
           </Link>

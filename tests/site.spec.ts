@@ -21,7 +21,9 @@ test("homepage, project portfolio, and careers are navigable", async ({
   await expect(
     page.getByRole("heading", { name: "Our work, in focus." }),
   ).toBeVisible();
-  await expect(page.getByText("COMING SOON")).toBeVisible();
+  await expect(
+    page.getByText("DKS BUILDERS / COMING SOON", { exact: true }),
+  ).toBeVisible();
   await page.getByRole("link", { name: "Back to home" }).click();
   await page
     .getByRole("navigation", { name: "Main navigation" })
@@ -41,7 +43,10 @@ for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1920]) {
       page.getByRole("heading", { name: "Built with purpose." }),
     ).toBeVisible();
     await page
-      .getByRole("heading", { name: "Your vision.", exact: false })
+      .getByRole("heading", {
+        name: "Your vision. Our next conversation.",
+        exact: true,
+      })
       .scrollIntoViewIfNeeded();
     await expect(
       page.getByRole("link", { name: "dksbuilders@gmail.com", exact: true }),

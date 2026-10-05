@@ -8,12 +8,20 @@ export function Footer() {
         <div className="footer-top">
           <Brand />
           <nav aria-label="Footer navigation">
-            <Link href="/#company">Company</Link>
-            <Link href="/#services">Services</Link>
-            <Link href="/projects">Projects</Link>
-            <Link href="/careers">Careers</Link>
+            <Link prefetch={false} href="/#company">
+              Company
+            </Link>
+            <Link prefetch={false} href="/#services">
+              Services
+            </Link>
+            <Link prefetch={false} href="/projects">
+              Projects
+            </Link>
+            <Link prefetch={false} href="/careers">
+              Careers
+            </Link>
           </nav>
-          <Link className="text-link" href="/#main">
+          <Link prefetch={false} className="text-link" href="/#main">
             Back to top
             <ArrowUpRightIcon size={15} />
           </Link>

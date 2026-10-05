@@ -78,7 +78,7 @@ export function Hero() {
           <a className="sector" href="#services" key={title}>
             <Icon size={34} weight="light" />
             <div>
-              <h3>{title}</h3>
+              <p className="sector-title">{title}</p>
               <p>{copy}</p>
             </div>
           </a>

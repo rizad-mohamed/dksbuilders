@@ -11,7 +11,12 @@ const links = [
 ];
 export function Brand() {
   return (
-    <Link className="brand" href="/" aria-label="DKS Builders home">
+    <Link
+      prefetch={false}
+      className="brand"
+      href="/"
+      aria-label="DKS Builders home"
+    >
       <Image
         src="/assets/dks-original-logo.webp"
         alt=""
@@ -63,13 +68,15 @@ export function Header() {
         <Brand />
         <nav className="desktop-nav" aria-label="Main navigation">
           {links.map((link) => (
-            <Link key={link.label} href={link.href}>
+            <Link prefetch={false} key={link.label} href={link.href}>
               {link.label}
             </Link>
           ))}
-          <Link href="/#contact">Contact</Link>
+          <Link prefetch={false} href="/#contact">
+            Contact
+          </Link>
         </nav>
-        <Link className="button" href="/#contact">
+        <Link prefetch={false} className="button" href="/#contact">
           Discuss a project
           <ArrowRightIcon size={17} />
         </Link>
@@ -93,6 +100,7 @@ export function Header() {
         >
           {links.map((link) => (
             <Link
+              prefetch={false}
               key={link.label}
               href={link.href}
               onClick={() => setOpen(false)}
@@ -100,7 +108,11 @@ export function Header() {
               {link.label}
             </Link>
           ))}
-          <Link href="/#contact" onClick={() => setOpen(false)}>
+          <Link
+            prefetch={false}
+            href="/#contact"
+            onClick={() => setOpen(false)}
+          >
             Discuss a project
           </Link>
         </nav>

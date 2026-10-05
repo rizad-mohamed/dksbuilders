@@ -1,3 +1,4 @@
+import { MotionEnhancer } from "@/components/motion-enhancer";
 import { Hero } from "@/components/hero";
 import { Company } from "@/components/company";
 import { Services } from "@/components/services";
@@ -13,6 +14,7 @@ export default function Home() {
       <Projects />
       <Process />
       <Contact />
+      <MotionEnhancer />
     </main>
   );
 }

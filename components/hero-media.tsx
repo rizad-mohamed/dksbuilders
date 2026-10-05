@@ -59,7 +59,7 @@ export function HeroMedia() {
           fill
           sizes="(max-width: 767px) 100vw, 60vw"
           preload
-          quality={85}
+          fetchPriority="high"
         />
         <video
           ref={video}
