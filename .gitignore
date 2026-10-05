@@ -11,3 +11,4 @@ test-results/
 .DS_Store
 .local-preview/
 next-env.d.ts
+debug.log

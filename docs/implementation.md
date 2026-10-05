@@ -1,37 +1,31 @@
-# Redesign decisions
+﻿# DKS brand refresh — implementation decisions
 
-## Source audit
+The latest user request takes precedence over instructions in the earlier pasted brief. The full-site screenshot and supplied official DKS logo establish the current visual direction. The earlier light architectural concept informs the three-area service row and careers composition.
 
-The source was a static HTML/CSS/JavaScript site, with a blue company logo, charcoal/amber presentation, a full-width video hero, capability disclosures, a project register, an illustrative Three.js study, contact links, partner marks, and static QA scripts.
+## Brand and hierarchy
 
-The new brief authorizes a visual overhaul and a Next.js migration. The supplied reference establishes a light architectural layout, editorial headings, navy typography, blue controls and construction-drawing motifs. Newsreader suits that explicit editorial reference; DM Sans provides a readable body and interface companion. All controls and containers use square corners.
+The shared palette is white, DKS blue (#0074be) and deep navy (#103448). DM Sans is the primary display/interface family, matching the modern architectural reference. Newsreader is limited to the three service titles, following the compact reference. Buttons use pill corners; primary containers use 22px corners, nested media 16px and small marks 12px. Projects and Careers keep their authorized Coming Soon scope and share the header, transparent logo, palette, drawing motif and controls.
 
-Design configuration: DESIGN_VARIANCE 7, MOTION_INTENSITY 6, VISUAL_DENSITY 3. Native CSS supports the layout; no general-purpose UI framework is required.
+Homepage order: hero → three key areas → monochrome trusted brands (third section) → completed-project photography carousel and project register → Build your career with DKS → company and interactive structural study → six services → approach → contact.
 
-## Content preserved
+Residential, Commercial and Infrastructure reflect the documented company capabilities. The completed-building carousel uses supplied archive photographs 04, 05 and 06. Construction-stage images remain available in the asset archive. No photograph is assigned to a named register entry without a source mapping. No completion dates, financial figures, accreditation or testimonials are invented.
 
-Company location, phone numbers, both email addresses, six construction disciplines, mission/vision/values, coordinated turnkey delivery, named project-register entries, supplied marks, original company logo, and source asset provenance are retained.
+## Logo
 
-The homepage project photos remain an archive. Their file numbers do not establish a match to the named projects. Illustrative photography, film and the code-native structural model have explicit visible labels. No new counters, testimonials, accreditation or project-attribution claims are introduced.
+The supplied DKS mark was isolated with built-in imagegen background extraction, then trimmed and encoded as a transparent PNG: `public/assets/dks-logo-transparent.png`. Its alpha channel was verified. The header and footer use this full mark without a separate invented wordmark or background container.
 
-## Routes and metadata
+Final image-edit prompt: “Remove only the black background of the official logo to real transparent alpha PNG. Preserve the exact existing logo shapes, typography, arrangement, blue and grey colours and tagline verbatim. Do not redesign or stylize. Fit the full logo closely in the output with a small transparent margin, no huge blank canvas, no added shadow, no backdrop, no checkerboard baked into pixels.” The edit target was the supplied blue/grey DKS BUILDERS mark and Making Dreams Come to Life tagline; the website screenshot was excluded as an edit target. The original generated asset is preserved outside the project; its optimized project copy is committed with the site.
 
-The homepage is rebuilt in server-rendered sections with isolated client components. Projects and Careers are minimal Coming Soon routes as requested. The former capabilities anchor is supported alongside the new Services navigation.
+## Engineering detail and motion
 
-The obsolete preview-domain canonical, sitemap and structured-data URL are removed. A confirmed deployment origin can be configured with NEXT_PUBLIC_SITE_URL. Sitemap entries and absolute canonical URLs are omitted until it is provided. Contact facts use native microdata for GeneralContractor.
+Subtle blue grids, datum marks, section rules and a code-native axonometric drawing connect the sections. Drawing dimensions are illustrative and labelled CONCEPT / NOT TO SCALE. The retained Three.js structural study supports Plan, Frame and Enclosure, pointer response and rotation pause. It initializes near the viewport, caps pixel density, stops offscreen/in hidden tabs and disposes GPU resources. Reduced-motion and data-saving visitors explicitly opt into it.
 
-## Motion and media
+The hero plays the muted responsive film automatically when visible. It pauses offscreen/in hidden tabs, resumes on returning when the visitor has not deliberately paused, and preserves that deliberate pause. Reduced motion starts with a static opening-frame poster and an optional Play control. Unavailable media retains the poster; browser autoplay rejection retains the Play control.
 
-- CSS: hero entry, navigation underline, button feedback and image hover.
-- Motion Mini: one observer progressively enhances server-rendered reveal wrappers, importing the animation engine only when needed. Native CSS handles service-image transitions and scroll-timeline parallax with static fallbacks.
-- Three.js: interactive Plan/Frame/Enclosure visualization in an isolated canvas with pointer response and a pause control.
-- Responsive film: retained local MP4 derivatives, loaded on user request; no autoplay download.
-- Reduced motion: static CSS, no parallax, optional 3D, paused active film when the preference changes.
-- Data saving: automatic 3D initialization is withheld.
-- Lifecycle: 3D stops offscreen and in hidden tabs; all observers, listeners, geometry and materials are cleaned up.
+Native CSS view timelines provide stronger hero and photo parallax with static fallbacks. Motion Mini progressively adds section reveals. Navigation, buttons, accordion images, carousel controls and partner marks have restrained microanimations. Pointer glare uses CSS variables updated through requestAnimationFrame, without React updates per pointer frame. Reduced motion disables parallax and glare.
 
-The blueprint grid and drafting marks follow the explicitly supplied architectural reference. The implementation uses the preserved house illustration; it does not depict it as an actual DKS project.
+The native scroll-snap carousel supports touch/trackpad scrolling, labelled Previous/Next buttons, arrow-key navigation, a live current-slide indicator and disabled boundary controls. It does not advance automatically. The lint exceptions are confined to its intentionally focusable native scroll region; keyboard and automated accessibility tests validate the behavior.
 
-## Delivery boundaries
+## Delivery
 
-The implementation and legitimate staged commits remain local. The source remote is retained for provenance; nothing is pushed there. Remote CI cannot be verified until the new destination is supplied.
+All work remains local. No remote publishing or push is authorized by this refresh. The source remote remains for provenance until the requested new destination is provided. Existing contact details and the asset provenance record are preserved.

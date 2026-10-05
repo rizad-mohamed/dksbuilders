@@ -27,7 +27,7 @@ npm run test
 npm run test:lighthouse
 ```
 
-Playwright starts the production server and covers navigation, keyboard access, service disclosures, responsive overflow, media failures, reduced motion, Three.js controls, local images and automated WCAG checks. The automated Lighthouse runner checks the homepage and Coming Soon routes three times. Accessibility, best practices and SEO require 95; performance uses a 90 warning threshold to account for runner variance. Layout shift must remain under 0.1. Linux CI installs browser system dependencies automatically.
+Playwright starts the production server and covers navigation, keyboard access, service disclosures, responsive overflow, media failures, reduced motion, autoplay/pause behavior, carousel buttons/keyboard controls, Three.js controls, local images and automated WCAG checks. The automated Lighthouse runner checks the homepage and Coming Soon routes three times. Accessibility, best practices and SEO require 95; performance uses a 90 warning threshold to account for runner variance. Layout shift must remain under 0.1. Linux CI installs browser system dependencies automatically.
 
 ## Architecture
 
@@ -41,13 +41,13 @@ Playwright starts the production server and covers navigation, keyboard access, 
 
 Lighthouse runs through a maintained programmatic API and writes HTML/JSON reports to .lighthouseci/reports. No Lighthouse CI server or upload credential is needed.
 
-Motion Mini is loaded only when reveal content enters the viewport. Native CSS scroll timelines provide image parallax where supported; other browsers show static images. CSS handles service transitions, navigation, CTA and image interactions. The Three.js structural model loads near the viewport, caps pixel density, stops offscreen or in hidden tabs, and disposes GPU resources. Reduced-motion and data-saving visitors opt into the model. Film downloads only on an explicit Play action, uses the mobile derivative on small screens, pauses offscreen and falls back to the hero image if unavailable.
+Motion Mini is loaded only when reveal content enters the viewport. Native CSS scroll timelines provide image parallax where supported; other browsers show static images. CSS handles service transitions, navigation, CTA and image interactions. The Three.js structural model loads near the viewport, caps pixel density, stops offscreen or in hidden tabs, and disposes GPU resources. Reduced-motion and data-saving visitors opt into the model. The hero film autoplays muted when visible, uses the mobile derivative on small screens, pauses offscreen/in hidden tabs, and respects a visitor’s explicit pause. Reduced motion starts with a static poster and optional Play control; unavailable media retains that poster.
 
 ## Content and assets
 
 See [content and asset provenance](docs/content-and-assets.md). Illustrative images, film and geometry are labelled and are not presented as evidence of DKS projects or staff. The supplied project photos are not mapped to named project-register entries without confirmation. No unverifiable statistics, awards, certifications or testimonials are added.
 
-Newsreader's editorial serif follows the supplied architectural reference; DM Sans supports navigation and body text. Both are self-hosted with their SIL Open Font Licenses.
+DM Sans provides the primary modern architectural typography; Newsreader is limited to the service-row titles inspired by the compact reference. Both are self-hosted with their SIL Open Font Licenses.
 
 ## Deployment
 

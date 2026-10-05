@@ -13,7 +13,7 @@ export function Contact() {
       <div className="contact-heading">
         <Reveal>
           <div className="eyebrow">
-            <span>06 /</span> LET?S TALK
+            <span>09 /</span> LET'S TALK
           </div>
           <h2 id="contact-title">
             Your vision.
@@ -23,8 +23,8 @@ export function Contact() {
         </Reveal>
         <div>
           <p>
-            Tell us what you?re planning, where it?s located and what you need.
-            Let?s discuss the way forward.
+            Tell us what you're planning, where it's located and what you need.
+            Let's discuss the way forward.
           </p>
           <a
             className="button"

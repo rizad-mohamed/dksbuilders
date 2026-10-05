@@ -11,7 +11,7 @@ export function Company() {
       <div className="company-grid">
         <Reveal className="company-copy">
           <div className="eyebrow">
-            <span>02 /</span> THE COMPANY
+            <span>06 /</span> THE COMPANY
           </div>
           <h2 id="company-title">
             A clear vision.

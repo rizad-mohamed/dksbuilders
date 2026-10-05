@@ -20,7 +20,7 @@ export function Services() {
         <div className="section-head">
           <Reveal>
             <div className="eyebrow">
-              <span>03 /</span> WHAT WE DO
+              <span>07 /</span> WHAT WE DO
             </div>
             <h2 id="services-title">
               Expertise, across

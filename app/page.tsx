@@ -1,5 +1,8 @@
 import { MotionEnhancer } from "@/components/motion-enhancer";
-import { Hero } from "@/components/hero";
+import { GlareEnhancer } from "@/components/glare-enhancer";
+import { Hero, ServiceHighlights } from "@/components/hero";
+import { TrustedBrands } from "@/components/trusted-brands";
+import { Careers } from "@/components/careers";
 import { Company } from "@/components/company";
 import { Services } from "@/components/services";
 import { Projects } from "@/components/projects";
@@ -9,12 +12,16 @@ export default function Home() {
   return (
     <main id="main">
       <Hero />
+      <ServiceHighlights />
+      <TrustedBrands />
+      <Projects />
+      <Careers />
       <Company />
       <Services />
-      <Projects />
       <Process />
       <Contact />
       <MotionEnhancer />
+      <GlareEnhancer />
     </main>
   );
 }

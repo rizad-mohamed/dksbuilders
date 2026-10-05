@@ -1,7 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
-import { partners } from "@/lib/content";
 import { Reveal } from "./motion";
 import { Parallax } from "./parallax";
 export function Process() {
@@ -16,7 +13,7 @@ export function Process() {
           <div className="process-grid">
             <Reveal className="process-intro">
               <div className="eyebrow">
-                <span>05 /</span> OUR APPROACH
+                <span>08 /</span> OUR APPROACH
               </div>
               <h2 id="process-title">
                 Thought through.
@@ -69,46 +66,8 @@ export function Process() {
               ))}
             </ol>
           </div>
-          <div className="partners">
-            <div className="eyebrow">
-              ACROSS PUBLIC INSTITUTIONS & PRIVATE ENTERPRISE
-            </div>
-            <div className="partner-grid">
-              {partners.map((partner, i) => (
-                <Image
-                  key={partner}
-                  src={`/assets/trusted-brand-${i + 1}.webp`}
-                  width={106}
-                  height={79}
-                  alt={partner}
-                />
-              ))}
-            </div>
-          </div>
         </div>
       </section>
-      <div className="wrap career-banner">
-        <div className="career-copy">
-          <div className="eyebrow">OUR PEOPLE</div>
-          <h2>Build your career with DKS.</h2>
-          <p>Different skills. A shared purpose.</p>
-          <Link prefetch={false} className="text-link" href="/careers">
-            Career opportunities
-            <ArrowRightIcon size={16} />
-          </Link>
-        </div>
-        <div className="career-image">
-          <Image
-            src="/assets/engineering-team-1280.webp"
-            fill
-            sizes="(max-width: 767px) 100vw, 45vw"
-            alt="Illustrative engineers reviewing construction plans"
-          />
-          <span className="image-credit">
-            Illustrative imagery · not DKS staff
-          </span>
-        </div>
-      </div>
     </>
   );
 }

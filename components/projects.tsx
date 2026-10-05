@@ -1,8 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Reveal } from "./motion";
-import { Parallax } from "./parallax";
+import { ProjectCarousel } from "./project-carousel";
 export function Projects() {
   return (
     <section
@@ -15,47 +14,14 @@ export function Projects() {
           <div className="eyebrow">
             <span>04 /</span> SELECTED WORK
           </div>
-          <h2 id="projects-title">Projects, in detail.</h2>
+          <h2 id="projects-title">Completed projects.</h2>
         </Reveal>
         <Link prefetch={false} href="/projects" className="text-link">
           Project portfolio
           <ArrowRightIcon size={17} />
         </Link>
       </div>
-      <div className="projects-grid">
-        {[
-          {
-            src: "01",
-            title: "From structure to space.",
-            copy: "A closer look at the work, materials and construction behind our buildings.",
-          },
-          {
-            src: "03",
-            title: "Built, from the ground up.",
-            copy: "Construction photographs from the supplied DKS Builders archive.",
-          },
-        ].map((item, i) => (
-          <Reveal key={item.src} delay={i * 0.1} className="project-plate">
-            <figure>
-              <Parallax className="project-photo">
-                <Image
-                  src={`/assets/dks-project-${item.src}.webp`}
-                  fill
-                  sizes="(max-width: 767px) 100vw, 50vw"
-                  alt={`DKS Builders supplied construction archive photograph ${i + 1}`}
-                />
-              </Parallax>
-              <figcaption className="project-caption">
-                <div>
-                  <h3>{item.title}</h3>
-                  <p>{item.copy}</p>
-                </div>
-                <span>ARCHIVE / 0{i + 1}</span>
-              </figcaption>
-            </figure>
-          </Reveal>
-        ))}
-      </div>
+      <ProjectCarousel />
       <p className="archive-note">
         Supplied project photography. Images are not attributed to individual
         entries in the project register.

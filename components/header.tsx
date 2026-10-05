@@ -18,15 +18,12 @@ export function Brand() {
       aria-label="DKS Builders home"
     >
       <Image
-        src="/assets/dks-original-logo.webp"
+        src="/assets/dks-logo-transparent.png"
         alt=""
-        width={48}
-        height={34}
+        width={180}
+        height={90}
+        unoptimized
       />
-      <span className="wordmark">
-        <b>DKS</b> BUILDERS
-        <span className="brand-note">ENGINEERING & CONSTRUCTION</span>
-      </span>
     </Link>
   );
 }

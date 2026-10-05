@@ -8,11 +8,11 @@ test("homepage, project portfolio, and careers are navigable", async ({
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await expect(
-    page.getByRole("heading", { name: "Built with purpose." }),
+    page.getByRole("heading", { name: "Engineering what comes next." }),
   ).toBeVisible();
   await page.getByRole("link", { name: "Explore our work" }).click();
   await expect(
-    page.getByRole("heading", { name: "Projects, in detail." }),
+    page.getByRole("heading", { name: "Completed projects." }),
   ).toBeInViewport();
   await page
     .getByRole("navigation", { name: "Main navigation" })
@@ -40,7 +40,7 @@ for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1920]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/");
     await expect(
-      page.getByRole("heading", { name: "Built with purpose." }),
+      page.getByRole("heading", { name: "Engineering what comes next." }),
     ).toBeVisible();
     await page
       .getByRole("heading", {
@@ -108,16 +108,15 @@ test("primary contact links use the preserved contact details", async ({
   ).toHaveAttribute("href", /mailto:dksbuilders@gmail.com/);
 });
 
-test("film is optional and handles unavailable media", async ({ page }) => {
+test("autoplay film handles unavailable media", async ({ page }) => {
   await page.route("**/*.mp4", (route) => route.abort());
   await page.goto("/");
   await expect(
-    page.getByAltText("Illustrative contemporary tropical house among palms"),
+    page.getByAltText("Opening frame of the illustrative construction montage"),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Play hero film" }).click();
   await expect(page.getByRole("status")).toContainText("film is unavailable");
   await expect(
-    page.getByRole("heading", { name: "Built with purpose." }),
+    page.getByRole("heading", { name: "Engineering what comes next." }),
   ).toBeVisible();
 });
 
@@ -191,9 +190,8 @@ test("local images load without broken assets", async ({ page }) => {
       .toBe(true);
   }
 });
-test("hero film plays on request and pauses out of view", async ({ page }) => {
+test("hero film autoplays and pauses out of view", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("button", { name: "Play hero film" }).click();
   await expect(page.getByRole("button", { name: "Pause film" })).toBeVisible({
     timeout: 15000,
   });
@@ -201,4 +199,58 @@ test("hero film plays on request and pauses out of view", async ({ page }) => {
   await expect(
     page.getByRole("button", { name: "Play hero film" }),
   ).toBeAttached();
+});
+
+test("project carousel supports buttons and keyboard navigation", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const carousel = page.getByRole("region", {
+    name: "DKS project photography",
+  });
+  await carousel.scrollIntoViewIfNeeded();
+  await expect(
+    carousel.getByRole("button", { name: "Previous project" }),
+  ).toBeDisabled();
+  await carousel.getByRole("button", { name: "Next project" }).click();
+  await expect(carousel.locator("[aria-live]")).toContainText("02 of 03");
+  const slides = carousel.getByRole("group", { name: /Project slides/ });
+  await slides.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(carousel.locator("[aria-live]")).toContainText("03 of 03");
+  await expect(
+    carousel.getByRole("button", { name: "Next project" }),
+  ).toBeDisabled();
+  await page.keyboard.press("ArrowLeft");
+  await expect(carousel.locator("[aria-live]")).toContainText("02 of 03");
+});
+
+test("visitor-paused hero film stays paused after scrolling back", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Pause film" }).click();
+  await page.locator("#contact").scrollIntoViewIfNeeded();
+  await page.locator(".hero").scrollIntoViewIfNeeded();
+  await expect(
+    page.getByRole("button", { name: "Play hero film" }),
+  ).toBeVisible();
+  await expect
+    .poll(() =>
+      page.locator("video").evaluate((video: HTMLVideoElement) => video.paused),
+    )
+    .toBe(true);
+});
+
+test("mobile hero autoplays the mobile film", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/");
+  await expect(page.getByRole("button", { name: "Pause film" })).toBeVisible({
+    timeout: 15000,
+  });
+  await expect(page.locator("video")).toHaveAttribute(
+    "src",
+    "/assets/dks-hero-mobile.mp4",
+  );
 });

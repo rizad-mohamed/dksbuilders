@@ -17,6 +17,9 @@ try {
   await page
     .locator(".study")
     .screenshot({ path: ".local-preview/structural-study.png" });
+  await page
+    .locator(".carousel-track")
+    .evaluate((host) => host.scrollTo({ left: 0, behavior: "instant" }));
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({
     path: ".local-preview/desktop.png",

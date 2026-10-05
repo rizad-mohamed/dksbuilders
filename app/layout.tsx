@@ -14,6 +14,7 @@ const serif = localFont({
   src: "../public/fonts/newsreader-latin.woff2",
   variable: "--font-serif",
   weight: "200 800",
+  preload: false,
   display: "swap",
 });
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
@@ -49,9 +50,9 @@ export const metadata: Metadata = {
     title: "DKS Builders | Built with purpose",
     images: siteUrl ? ["/assets/dks-hero-poster-1280.webp"] : [],
   },
-  icons: { icon: "/assets/dks-original-logo.webp" },
+  icons: { icon: "/assets/dks-logo-transparent.png" },
 };
-export const viewport: Viewport = { themeColor: "#f5f7f8" };
+export const viewport: Viewport = { themeColor: "#f7fafc" };
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {

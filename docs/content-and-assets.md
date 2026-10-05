@@ -59,3 +59,13 @@ The user-uploaded construction montage was inspected as a contact sheet. Silent 
 Eight transparent brand marks (`1.png`–`8.png`, 106×79px) were losslessly encoded as WebP and shown at their native size: BOC, Access Engineering, KDAW, Ministry of Buddhasasana, Mahaweli Authority, SEC, University of Moratuwa and UDA. These are the user-designated trusted brands; no certification or endorsement claim is added. Five supplied 500×500 project PNGs (01, 03, 04, 05, 06) were encoded to WebP, without generative alteration. Their file numbers do not establish exact project-name correspondence, so the gallery uses descriptive captions rather than matching them to project-register entries.
 
 The supplied map short link resolved to DKS Builders at 6.2898939,80.1617432. Google returned an embed document identifying the same location in Elpitiya; the frame uses those exact coordinates and the original short link is used for directions. No Google Maps API key is introduced.
+
+## 5 October 2026 — DKS brand refresh
+
+The latest direct user request replaces the earlier visual direction. The full-site capture from dksbuilders.com is now the primary layout/style reference; the compact light concept informs the three-area row and careers section. Earlier aesthetic decisions above are historical provenance, not current design instructions.
+
+The supplied full DKS logo was isolated using built-in imagegen background extraction and optimized to a 360px transparent PNG (`dks-logo-transparent.png`, approximately 47KB). The visible header/footer use this mark without an opaque backing. Exact edit prompt and usage are recorded in implementation.md.
+
+The completed-building slider selects supplied archive photographs 04, 05 and 06: a finished two-storey building beside a lawn, the Panduwasnuwara bus stand facade and a poolside terrace. These are shown with descriptive archive captions rather than invented named-project matches. Photographs 01 and 03 remain preserved but are omitted from this completed-building selection. The separately sourced named register remains unchanged.
+
+Trusted marks are displayed only in monochrome, including hover, in the third homepage section. The supplied film now plays automatically when visible unless reduced motion is requested; its illustrative status remains visible. Code-native technical drawings use illustrative dimensions and explicitly say CONCEPT / NOT TO SCALE.

@@ -1,8 +1,10 @@
+import { EngineeringDrawing } from "./engineering-drawing";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 export function ComingSoon({ title, copy }: { title: string; copy: string }) {
   return (
     <main id="main" className="wrap coming-soon">
+      <EngineeringDrawing />
       <div className="eyebrow">
         <span>DKS BUILDERS /</span> COMING SOON
       </div>

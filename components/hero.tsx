@@ -8,82 +8,91 @@ import {
 import { HeroMedia } from "./hero-media";
 export function Hero() {
   return (
-    <>
-      <section className="hero" aria-labelledby="hero-title">
-        <div className="wrap hero-grid">
-          <div className="hero-copy">
-            <div className="eyebrow">
-              <span>01 /</span> BUILDING BETTER SPACES
-            </div>
-            <h1 id="hero-title">
-              Built with
-              <br />
-              purpose.
-            </h1>
-            <p>
-              Construction expertise. Clear communication. Thoughtful execution,
-              from first idea to built reality.
-            </p>
-            <div className="hero-actions">
-              <a className="button" href="#projects">
-                Explore our work
-                <ArrowRightIcon size={18} />
-              </a>
-              <a className="button outline" href="#contact">
-                Discuss a project
-              </a>
-            </div>
-          </div>
-          <div className="hero-visual">
-            <HeroMedia />
-            <div className="drawing-mark" aria-hidden="true">
-              <span>A</span>
-              <span>CONCEPT ELEVATION</span>
-              <span>B</span>
-            </div>
-            <div className="drawing-vertical" aria-hidden="true" />
-            <div className="visual-caption">
-              <span>ELEVATION A / CONSTRUCTION STUDY</span>
-              <span>Illustrative imagery</span>
-            </div>
-          </div>
+    <section className="hero wrap" aria-labelledby="hero-title">
+      <HeroMedia />
+      <div className="hero-shade" />
+      <div className="hero-copy">
+        <div className="eyebrow">
+          <span>01 /</span> BUILDING WITH PURPOSE · SRI LANKA
         </div>
-        <div className="hero-bottom">
-          <div className="wrap hero-bottom-inner">
-            <a href="#company">
-              <ArrowDownIcon size={14} /> Scroll to discover
-            </a>
-            <span>ELPITIYA, SRI LANKA · BUILDINGS & INFRASTRUCTURE</span>
-          </div>
-        </div>
-      </section>
-      <div className="wrap sector-strip">
-        {[
-          {
-            Icon: HouseLineIcon,
-            title: "Residential",
-            copy: "Thoughtful spaces for everyday living.",
-          },
-          {
-            Icon: BuildingsIcon,
-            title: "Commercial",
-            copy: "Buildings shaped around your business.",
-          },
-          {
-            Icon: BridgeIcon,
-            title: "Infrastructure",
-            copy: "Engineering connections that matter.",
-          },
-        ].map(({ Icon, title, copy }) => (
-          <a className="sector" href="#services" key={title}>
-            <Icon size={34} weight="light" />
-            <div>
-              <p className="sector-title">{title}</p>
-              <p>{copy}</p>
-            </div>
+        <h1 id="hero-title">
+          Engineering
+          <br />
+          what comes <em>next.</em>
+        </h1>
+        <p>
+          Making dreams come to life.
+          <br />
+          From your first idea to built reality.
+        </p>
+        <div className="hero-actions">
+          <a className="button" href="#projects">
+            Explore our work
+            <ArrowRightIcon size={18} />
           </a>
-        ))}
+          <a className="button outline" href="#contact">
+            Discuss a project
+          </a>
+        </div>
       </div>
-    </>
+      <div className="hero-note">
+        <span>BUILDINGS / INFRASTRUCTURE</span>
+        <p>
+          Construction expertise.
+          <br />
+          One connected team.
+        </p>
+      </div>
+      <div className="hero-bottom">
+        <a href="#highlights">
+          <ArrowDownIcon size={14} /> Scroll to discover
+        </a>
+        <span>ELPITIYA, SRI LANKA</span>
+        <span>Illustrative cinematic imagery</span>
+      </div>
+      <div className="hero-datum" aria-hidden="true">
+        <span>A</span>
+        <i />
+        <span>B</span>
+        <i />
+        <span>C</span>
+      </div>
+    </section>
+  );
+}
+export function ServiceHighlights() {
+  return (
+    <section
+      id="highlights"
+      className="wrap sector-strip"
+      aria-label="Our key areas of work"
+    >
+      {[
+        {
+          Icon: HouseLineIcon,
+          title: "Residential",
+          copy: "Thoughtful homes for modern living.",
+        },
+        {
+          Icon: BuildingsIcon,
+          title: "Commercial",
+          copy: "Functional spaces for growing businesses.",
+        },
+        {
+          Icon: BridgeIcon,
+          title: "Infrastructure",
+          copy: "Engineering connections that matter.",
+        },
+      ].map(({ Icon, title, copy }) => (
+        <a className="sector" href="#services" key={title}>
+          <Icon size={34} weight="light" />
+          <div>
+            <p className="sector-title">{title}</p>
+            <p>{copy}</p>
+          </div>
+          <ArrowRightIcon className="sector-arrow" size={17} />
+        </a>
+      ))}
+    </section>
   );
 }

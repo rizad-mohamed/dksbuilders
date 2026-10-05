@@ -5,59 +5,86 @@ import { PauseIcon, PlayIcon } from "@phosphor-icons/react";
 export function HeroMedia() {
   const video = useRef<HTMLVideoElement>(null);
   const host = useRef<HTMLDivElement>(null);
+  const userPaused = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [failed, setFailed] = useState(false);
   useEffect(() => {
+    const media = video.current;
+    if (!media) return;
+    let inView = false;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function play() {
+      if (
+        !media ||
+        reduced.matches ||
+        userPaused.current ||
+        !inView ||
+        document.hidden
+      )
+        return;
+      if (!media.getAttribute("src"))
+        media.src =
+          window.innerWidth < 768
+            ? "/assets/dks-hero-mobile.mp4"
+            : "/assets/dks-hero-desktop.mp4";
+      void media.play().catch(() => {
+        /* Browser policy may require the visible play control. */
+      });
+    }
     const observer = new IntersectionObserver(
       (entries) => {
-        if (!entries[0].isIntersecting) {
-          video.current?.pause();
-        }
+        inView = entries[0].isIntersecting;
+        if (inView) play();
+        else media.pause();
       },
-      { threshold: 0.05 },
+      { threshold: 0.1 },
     );
     if (host.current) observer.observe(host.current);
     const onVisibility = () => {
-      if (document.hidden) video.current?.pause();
+      if (document.hidden) media.pause();
+      else play();
     };
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onMotion = () => {
-      if (reduced.matches) video.current?.pause();
+      if (reduced.matches) media.pause();
+      else play();
     };
     document.addEventListener("visibilitychange", onVisibility);
     reduced.addEventListener("change", onMotion);
     return () => {
       observer.disconnect();
+      media.pause();
       document.removeEventListener("visibilitychange", onVisibility);
       reduced.removeEventListener("change", onMotion);
     };
   }, []);
   async function toggle() {
-    if (!video.current) return;
+    const media = video.current;
+    if (!media) return;
     if (playing) {
-      video.current.pause();
+      userPaused.current = true;
+      media.pause();
       return;
     }
-    if (!video.current.getAttribute("src")) {
-      video.current.src =
+    userPaused.current = false;
+    if (!media.getAttribute("src"))
+      media.src =
         window.innerWidth < 768
           ? "/assets/dks-hero-mobile.mp4"
           : "/assets/dks-hero-desktop.mp4";
-    }
     try {
-      await video.current.play();
+      await media.play();
     } catch {
-      setFailed(true);
+      /* Keep the poster and control when playback is blocked. */
     }
   }
   return (
     <>
       <div className="hero-media" ref={host}>
         <Image
-          src="/assets/home-1280.webp"
-          alt="Illustrative contemporary tropical house among palms"
+          src="/assets/dks-hero-poster-1280.webp"
+          alt="Opening frame of the illustrative construction montage"
           fill
-          sizes="(max-width: 767px) 100vw, 60vw"
+          sizes="100vw"
           preload
           fetchPriority="high"
         />
@@ -83,13 +110,13 @@ export function HeroMedia() {
           onClick={toggle}
           aria-pressed={playing}
         >
-          {playing ? <PauseIcon size={13} /> : <PlayIcon size={13} />}{" "}
+          {playing ? <PauseIcon size={14} /> : <PlayIcon size={14} />}
           {playing ? "Pause film" : "Play hero film"}
         </button>
       )}
       {failed && (
         <span className="sr-only" role="status">
-          The film is unavailable. The illustrative house image remains visible.
+          The film is unavailable. The construction poster remains visible.
         </span>
       )}
     </>
