@@ -16,9 +16,9 @@ export function Contact() {
             <span>09 /</span> LET'S TALK
           </div>
           <h2 id="contact-title">
-            Your vision.
+            Let's build
             <br />
-            Our next conversation.
+            <em>what’s next.</em>
           </h2>
         </Reveal>
         <div>

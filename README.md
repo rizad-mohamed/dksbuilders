@@ -27,7 +27,7 @@ npm run test
 npm run test:lighthouse
 ```
 
-Playwright starts the production server and covers navigation, keyboard access, service disclosures, responsive overflow, media failures, reduced motion, autoplay/pause behavior, carousel buttons/keyboard controls, Three.js controls, local images and automated WCAG checks. The automated Lighthouse runner checks the homepage and Coming Soon routes three times. Accessibility, best practices and SEO require 95; performance uses a 90 warning threshold to account for runner variance. Layout shift must remain under 0.1. Linux CI installs browser system dependencies automatically.
+Playwright starts the production server and covers navigation, keyboard access, service disclosures, responsive overflow, media failures, reduced motion, autoplay/pause behavior, WhatsApp contact destinations, Three.js controls, local images and automated WCAG checks. The automated Lighthouse runner checks the homepage and Coming Soon routes three times. Accessibility, best practices and SEO require 95; performance uses a 90 warning threshold to account for runner variance. Layout shift must remain under 0.1. Linux CI installs browser system dependencies automatically.
 
 ## Architecture
 

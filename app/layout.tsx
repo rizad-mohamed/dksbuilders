@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/header";
+import { WhatsAppLink } from "@/components/whatsapp-link";
 import { Footer } from "@/components/footer";
 import "./globals.css";
 
@@ -65,6 +66,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <WhatsAppLink />
       </body>
     </html>
   );

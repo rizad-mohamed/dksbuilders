@@ -3,17 +3,17 @@
 Verified on 5 October 2026 in the Windows workspace using Node.js 24.19.0.
 
 - ESLint, strict TypeScript, formatting, git diff checks and the production build passed.
-- All 22 Playwright tests passed against the production build. Automated WCAG and mobile autoplay checks were repeated after the final mobile spacing adjustment and passed.
+- All 22 Playwright tests passed against the latest production build, including the five-photo gallery revision, mobile autoplay, WhatsApp link destinations and automated WCAG checks.
 - Automated WCAG A/AA checks passed for the homepage, Projects and Careers.
 - Responsive overflow checks passed at 320, 375, 430, 768, 1024, 1280, 1440 and 1920 pixels.
 - Navigation, Escape behavior, keyboard skip link, contact destinations, image loading and service disclosures passed.
 - Desktop/mobile film autoplay, unavailable-film fallback, offscreen pausing, visitor pause persistence and reduced-motion behavior passed.
-- Carousel button/arrow-key navigation, current-slide indication and disabled boundary controls passed. Three.js stage selection and rotation pause passed.
+- WhatsApp destination and new-tab behavior passed on the homepage, Projects and Careers. Three.js stage selection and rotation pause passed. The gallery reuses the supplied photos and the image-loading checks cover all five.
 - Desktop, mobile and 3D screenshots were visually inspected. The transparent logo has a real alpha channel and an approximately 47KB project PNG. Colours, fonts and rounded corners were verified after removing a stylesheet encoding marker that prevented root variables from matching.
 
 ## Lighthouse
 
-Default mobile Lighthouse audits of the final production build, three runs per page; medians below. The runner completed successfully and cleaned up its owned Chromium and Next.js processes.
+The preceding complete brand refresh received default mobile Lighthouse audits, three runs per page; its medians are preserved below. These scores predate the subsequent gallery, colour-logo and WhatsApp refinements. The latest refinements passed the browser, accessibility, responsive and production-build checks above; Lighthouse was not repeated for these visual changes. The runner completed successfully and cleaned up its owned Chromium and Next.js processes.
 
 | Route     | Performance | Accessibility | Best practices | SEO | CLS    |
 | --------- | ----------- | ------------- | -------------- | --- | ------ |

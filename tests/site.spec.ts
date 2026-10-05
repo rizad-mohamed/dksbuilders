@@ -12,7 +12,7 @@ test("homepage, project portfolio, and careers are navigable", async ({
   ).toBeVisible();
   await page.getByRole("link", { name: "Explore our work" }).click();
   await expect(
-    page.getByRole("heading", { name: "Completed projects." }),
+    page.getByRole("heading", { name: "Places that matter." }),
   ).toBeInViewport();
   await page
     .getByRole("navigation", { name: "Main navigation" })
@@ -44,7 +44,7 @@ for (const width of [320, 375, 430, 768, 1024, 1280, 1440, 1920]) {
     ).toBeVisible();
     await page
       .getByRole("heading", {
-        name: "Your vision. Our next conversation.",
+        name: "Let's build what’s next.",
         exact: true,
       })
       .scrollIntoViewIfNeeded();
@@ -201,29 +201,19 @@ test("hero film autoplays and pauses out of view", async ({ page }) => {
   ).toBeAttached();
 });
 
-test("project carousel supports buttons and keyboard navigation", async ({
-  page,
-}) => {
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/");
-  const carousel = page.getByRole("region", {
-    name: "DKS project photography",
-  });
-  await carousel.scrollIntoViewIfNeeded();
-  await expect(
-    carousel.getByRole("button", { name: "Previous project" }),
-  ).toBeDisabled();
-  await carousel.getByRole("button", { name: "Next project" }).click();
-  await expect(carousel.locator("[aria-live]")).toContainText("02 of 03");
-  const slides = carousel.getByRole("group", { name: /Project slides/ });
-  await slides.focus();
-  await page.keyboard.press("ArrowRight");
-  await expect(carousel.locator("[aria-live]")).toContainText("03 of 03");
-  await expect(
-    carousel.getByRole("button", { name: "Next project" }),
-  ).toBeDisabled();
-  await page.keyboard.press("ArrowLeft");
-  await expect(carousel.locator("[aria-live]")).toContainText("02 of 03");
+test("WhatsApp contact remains available across pages", async ({ page }) => {
+  for (const path of ["/", "/projects", "/careers"]) {
+    await page.goto(path);
+    const link = page.getByRole("link", {
+      name: "Let's talk on WhatsApp (opens in a new tab)",
+    });
+    await expect(link).toBeVisible();
+    await expect(link).toHaveAttribute(
+      "href",
+      /^https:\/\/wa\.me\/94777552416\?text=/,
+    );
+    await expect(link).toHaveAttribute("target", "_blank");
+  }
 });
 
 test("visitor-paused hero film stays paused after scrolling back", async ({

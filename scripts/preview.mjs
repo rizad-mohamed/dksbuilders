@@ -17,16 +17,22 @@ try {
   await page
     .locator(".study")
     .screenshot({ path: ".local-preview/structural-study.png" });
-  await page
-    .locator(".carousel-track")
-    .evaluate((host) => host.scrollTo({ left: 0, behavior: "instant" }));
   await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({
     path: ".local-preview/desktop.png",
     fullPage: true,
   });
   await page.screenshot({ path: ".local-preview/desktop-hero.png" });
+  await page.locator("#projects").screenshot({
+    path: ".local-preview/project-gallery.png",
+    style: ".site-header, .whatsapp-float { visibility: hidden; }",
+  });
+  await page.locator(".trusted-section").screenshot({
+    path: ".local-preview/colour-logos.png",
+    style: ".site-header, .whatsapp-float { visibility: hidden; }",
+  });
   await page.setViewportSize({ width: 375, height: 812 });
+  await page.evaluate(() => window.scrollTo(0, 0));
   await page.screenshot({
     path: ".local-preview/mobile.png",
     fullPage: true,

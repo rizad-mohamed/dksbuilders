@@ -64,6 +64,15 @@ export function Services() {
                   <PlusIcon size={22} weight="light" aria-hidden="true" />
                 </summary>
                 <p>{service.copy}</p>
+                <a
+                  className="service-enquiry"
+                  href={
+                    "mailto:dksbuilders@gmail.com?subject=" +
+                    encodeURIComponent("Enquiry: " + service.title)
+                  }
+                >
+                  Discuss this service
+                </a>
               </details>
             ))}
           </div>

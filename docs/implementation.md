@@ -4,11 +4,11 @@ The latest user request takes precedence over instructions in the earlier pasted
 
 ## Brand and hierarchy
 
-The shared palette is white, DKS blue (#0074be) and deep navy (#103448). DM Sans is the primary display/interface family, matching the modern architectural reference. Newsreader is limited to the three service titles, following the compact reference. Buttons use pill corners; primary containers use 22px corners, nested media 16px and small marks 12px. Projects and Careers keep their authorized Coming Soon scope and share the header, transparent logo, palette, drawing motif and controls.
+The shared palette is white, DKS blue (#0074be), deep navy (#103448) and restrained engineering yellow (#facb63). DM Sans is the primary display/interface family, matching the modern architectural reference. Newsreader is limited to the three service titles, following the compact reference. Buttons use pill corners; primary containers use 22px corners, nested media 16px and small marks 12px. Projects and Careers keep their authorized Coming Soon scope and share the header, transparent logo, palette, drawing motif and controls.
 
 Homepage order: hero → three key areas → monochrome trusted brands (third section) → completed-project photography carousel and project register → Build your career with DKS → company and interactive structural study → six services → approach → contact.
 
-Residential, Commercial and Infrastructure reflect the documented company capabilities. The completed-building carousel uses supplied archive photographs 04, 05 and 06. Construction-stage images remain available in the asset archive. No photograph is assigned to a named register entry without a source mapping. No completion dates, financial figures, accreditation or testimonials are invented.
+Residential, Commercial and Infrastructure reflect the documented company capabilities. The latest reference replaces the carousel with a framed two-over-three gallery using all five supplied archive photographs: 01, 03, 04, 05 and 06. The heading is Places that matter, covering both construction stages and finished spaces without implying that every photograph depicts a completed project. No photograph is assigned to a named register entry without a source mapping. No completion dates, financial figures, accreditation or testimonials are invented.
 
 ## Logo
 
@@ -22,9 +22,11 @@ Subtle blue grids, datum marks, section rules and a code-native axonometric draw
 
 The hero plays the muted responsive film automatically when visible. It pauses offscreen/in hidden tabs, resumes on returning when the visitor has not deliberately paused, and preserves that deliberate pause. Reduced motion starts with a static opening-frame poster and an optional Play control. Unavailable media retains the poster; browser autoplay rejection retains the Play control.
 
-Native CSS view timelines provide stronger hero and photo parallax with static fallbacks. Motion Mini progressively adds section reveals. Navigation, buttons, accordion images, carousel controls and partner marks have restrained microanimations. Pointer glare uses CSS variables updated through requestAnimationFrame, without React updates per pointer frame. Reduced motion disables parallax and glare.
+Native CSS view timelines provide stronger hero and photo parallax with static fallbacks. Motion Mini progressively adds section reveals. Navigation, buttons, accordion images, gallery photography and partner marks have restrained microanimations. Pointer glare uses CSS variables updated through requestAnimationFrame, without React updates per pointer frame. Reduced motion disables parallax and glare.
 
-The native scroll-snap carousel supports touch/trackpad scrolling, labelled Previous/Next buttons, arrow-key navigation, a live current-slide indicator and disabled boundary controls. It does not advance automatically. The lint exceptions are confined to its intentionally focusable native scroll region; keyboard and automated accessibility tests validate the behavior.
+The gallery is server-rendered and has no carousel runtime. Its two large photos are capped at 315px high and the three supporting photos at 225px; mobile photos are 215px high. Service photos are capped at 365px and process photos at 245px, with a more compact careers composition. Fixed number badges sit outside the parallax layer. The connected partner-logo row preserves the original colours, including hover. Stronger square grids and drafting marks echo the latest screenshots. Yellow accents highlight active services, their real email enquiry links, hero emphasis and the contact invitation.
+
+A server-rendered WhatsApp link sits in the lower-right corner on all pages. It uses the existing official-site destination, https://wa.me/94777552416, and opens only when the visitor clicks it. The message is prefilled rather than automatically sent. Its accessible label identifies WhatsApp and the new tab; safe-area spacing and footer clearance keep it usable on mobile.
 
 ## Delivery
 

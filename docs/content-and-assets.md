@@ -69,3 +69,9 @@ The supplied full DKS logo was isolated using built-in imagegen background extra
 The completed-building slider selects supplied archive photographs 04, 05 and 06: a finished two-storey building beside a lawn, the Panduwasnuwara bus stand facade and a poolside terrace. These are shown with descriptive archive captions rather than invented named-project matches. Photographs 01 and 03 remain preserved but are omitted from this completed-building selection. The separately sourced named register remains unchanged.
 
 Trusted marks are displayed only in monochrome, including hover, in the third homepage section. The supplied film now plays automatically when visible unless reduced motion is requested; its illustrative status remains visible. Code-native technical drawings use illustrative dimensions and explicitly say CONCEPT / NOT TO SCALE.
+
+## Subsequent visual refinement — latest user references
+
+The latest direct request restores partner marks to their original colours and replaces the carousel with the five-photo two-over-three archive gallery. This supersedes the monochrome and completed-building-only presentation described in the preceding historical entry. The source photographs and their descriptive archive captions remain unchanged and are not mapped to named register entries.
+
+Reduced displayed photo heights, more visible square grids and engineering-yellow highlights follow the new screenshots. A persistent lower-right WhatsApp link reuses the official source site's `wa.me/94777552416` destination and project-enquiry prefill. It opens a conversation only when clicked; the website never sends a message automatically.
