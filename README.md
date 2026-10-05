@@ -1,122 +1,54 @@
 # DKS Builders
 
-| Project credit | Contributor |
-| :--- | :--- |
-| Client project & development company | **[Quentagon](https://quentagon.com/)** |
-| Initial foundation & technical setup | **[Rizad Mohamed](https://www.linkedin.com/in/rizad-mohamed/)** |
-| Contributions | **[Hirusha Nilupul](https://www.linkedin.com/in/hirushanilupul/)** |
+A responsive construction-company website built with Next.js App Router, React, TypeScript and modern CSS. The homepage preserves the source company's factual content, supplied project archive, partner marks and responsive hero film. Projects and Careers are intentionally Coming Soon.
 
-A responsive engineering portfolio and landing page for DKS Builders, Sri Lanka.
+## Run locally
 
-[![Build and quality checks](https://github.com/rizad-mohamed/dksbuilders/actions/workflows/ci.yml/badge.svg)](https://github.com/rizad-mohamed/dksbuilders/actions/workflows/ci.yml)
-
-**[Live demo](https://dks-builders-reimagined.hirushailupul.chatgpt.site)** · **[Deployment guide](docs/deployment.md)**
-
-The current live demo is access controlled through Sites; access may require an authorized account.
-
-![DKS Builders landing page desktop preview](docs/preview.webp)
-
-## Features
-
-- Engineering drawing aesthetic, responsive layouts and cinematic hero video with mobile crop, poster fallback and playback controls.
-- Supplied project photography, eight trusted-brand logos, six construction disciplines and accessible project/service disclosures.
-- Workflow micro animations, horizontal scroll progress and an optional interactive Three.js structural study.
-- Google Maps office embed, directions link, floating WhatsApp shortcut and Quentagon footer credit.
-- Reduced-motion and data-saving support, with video paused off screen or when the tab is hidden.
-
-## Tech Stack
-
-[![HTML, CSS, JavaScript, Three.js, Node.js, Python and GitHub Actions](https://skillicons.dev/icons?i=html,css,js,threejs,nodejs,py,githubactions&theme=light)](https://skillicons.dev)
-
-**Frontend:** semantic HTML5, CSS3, JavaScript and Three.js. **Tooling:** Node.js/npm, esbuild and Python. **Quality:** Playwright and axe-core. **Delivery:** GitHub Actions and Sites static hosting.
-
-## Getting Started
-
-Requires **Node.js 22+**, **npm 10+** and **Python 3.12+**. CI uses Node.js 24 and Python 3.12.
+Requires Node.js 22+ and npm.
 
 ```sh
-git clone https://github.com/rizad-mohamed/dksbuilders.git
-cd dksbuilders
-npm ci --ignore-scripts
+npm ci
 npm run dev
 ```
 
-Open **http://localhost:3000**. Edit the source files directly in `dist/`; there is no framework server or separate `src/` directory.
+Open http://localhost:3000. For production: `npm run build`, then `npm run start`.
 
-## Environment Variables
+## Quality checks
 
-**None required.** Local development, static hosting and the existing CI workflow require no runtime API keys or application secrets. An `.env.example` is unnecessary until a configurable integration is added. Never commit credentials.
+```sh
+npm run lint
+npm run format:check
+npm run typecheck
+npm run build
+npx playwright install chromium
+npm run test
+npm run test:lighthouse
+```
 
-## Available Scripts
+Playwright starts the production server and covers navigation, keyboard access, service disclosures, responsive overflow, media failures, reduced motion, Three.js controls, local images and automated WCAG checks. Lighthouse CI checks the homepage and Coming Soon routes three times. Accessibility, best practices and SEO require 95; performance uses a 90 warning threshold to account for runner variance. Layout shift must remain under 0.1. Linux CI installs browser system dependencies automatically.
 
-| Command | Purpose |
-| :--- | :--- |
-| `npm run dev` | Serve the site locally on port 3000. |
-| `npm run check` | Audit syntax, assets, navigation, metadata and security policies. |
-| `npm run lint` / `npm test` | Aliases for the same static checks. |
-| `npm run build` | Bundle the local Three.js module and validate production files. |
-| `npm run test:browser` | Check responsive layouts, accessibility and core interactions. |
-| `npm run test:video` | Verify MP4 playback, controls and fallbacks. |
-| `npm run test:design` | Verify portfolio assets, motion, map, WhatsApp and credits. |
-| `npm run package:release` | Produce a deployment archive, checksum and source commit reference. |
+## Architecture
 
-Before running browser checks, install Chromium with `npx playwright install --with-deps chromium`. Use `npm audit` to review dependency advisories. There is no `npm start` script; production is served as static files.
+- `app/`: server-rendered routes, metadata, robots and sitemap.
+- `components/`: page sections and isolated interactive components.
+- `lib/`: content and the lazily imported Three.js scene.
+- `public/assets/`: preserved photography, film and company marks.
+- `public/fonts/`: self-hosted variable fonts and their licenses.
+- `tests/`: Playwright tests.
+- `.github/workflows/ci.yml`: installation, lint, formatting, types, production build, browser tests and Lighthouse.
 
-## Project Structure
+Motion provides viewport reveals and image parallax. CSS handles navigation, CTA and image interactions. The Three.js structural model loads near the viewport, caps pixel density, stops offscreen or in hidden tabs, and disposes GPU resources. Reduced-motion and data-saving visitors opt into the model. Film downloads only on an explicit Play action, uses the mobile derivative on small screens, pauses offscreen and falls back to the hero image if unavailable.
 
-| Path | What to change |
-| :--- | :--- |
-| `dist/index.html` | Page content, navigation, contact details and SEO metadata. |
-| `dist/styles.css` | Layout, typography, engineering theme and responsive styles. |
-| `dist/main.js` | Navigation, disclosures, progress, motion and media behavior. |
-| `dist/structure.js` | Optional 3D structural study. |
-| `dist/media-config.json` / `dist/assets/` | Hero video configuration, images and media. |
-| `scripts/` | Development server, build, validation and release tooling. |
-| `.github/` | CI/release workflow and Dependabot configuration. |
-| `.openai/hosting.json` | Existing Site identity and static output configuration. |
-| `docs/` | Deployment, QA, SEO and asset provenance notes. |
+## Content and assets
 
-Keep supplied project imagery and brand marks traceable; illustrative imagery must remain clearly labelled. See [content and asset notes](docs/content-and-assets.md).
+See [content and asset provenance](docs/content-and-assets.md). Illustrative images, film and geometry are labelled and are not presented as evidence of DKS projects or staff. The supplied project photos are not mapped to named project-register entries without confirmation. No unverifiable statistics, awards, certifications or testimonials are added.
+
+Newsreader's editorial serif follows the supplied architectural reference; DM Sans supports navigation and body text. Both are self-hosted with their SIL Open Font Licenses.
 
 ## Deployment
 
-Run `npm run build`, then serve **`dist/` at the web origin root**. Absolute `/assets/…` paths require changes before hosting under a subpath such as GitHub Pages. Apply `dist/_headers` or equivalent host policies; video hosting must support correct MIME types and byte-range requests.
+Deploy as a standard Node.js Next.js application, for example on Vercel or a Node host using `npm run build` and `npm run start`. No external API keys or runtime hosting plugin are required.
 
-The current demo uses **Sites**. A GitHub push runs CI and produces a tested deployment archive; it does **not** automatically publish to the live Site. Version tags matching `v*` also create a GitHub Release after validation. Publishing and domain changes are covered in the [deployment guide](docs/deployment.md).
+Set optional `NEXT_PUBLIC_SITE_URL=https://your-confirmed-domain.example` before building to enable absolute canonical URLs, metadata URLs and sitemap entries. It must be the confirmed public deployment URL; no old preview domain is retained. Without it, no public domain is assumed and the sitemap is empty.
 
-## Project Architecture
-
-```mermaid
-flowchart TD
-  H["Static page · index.html"] --> C["Layout and theme · styles.css"]
-  H --> J["Interactions · main.js"]
-  J --> M["Local media and video configuration"]
-  J --> S["Optional structural study · structure.js"]
-  S --> T["Locally bundled Three.js"]
-```
-
-## Responsive & Browser Support
-
-Mobile, tablet and desktop layouts are checked at **320, 390, 768, 1280, 1440 and 2560 px**. Automated coverage uses Chromium. Firefox, Safari and Edge are intended modern-browser targets; confirm them manually before a client rollout.
-
-## Performance / SEO
-
-- Responsive WebP imagery, lazy loading below the fold, local assets and an optional 3D enhancement with a static fallback.
-- Page metadata, canonical URL, Open Graph tags, LocalBusiness structured data, sitemap and `robots.txt`.
-- Update canonical, social, structured-data, sitemap and robots URLs together when changing domains.
-
-See [SEO notes](docs/research-and-local-seo.md) and [QA results](docs/qa.md). Automated checks are not a full accessibility certification or a measured Lighthouse score.
-
-## Code Quality
-
-Locked dependencies, syntax/static audits, Playwright/axe checks and dependency auditing run in GitHub Actions for pull requests, `main` pushes, version tags and manual runs. CI retains QA diagnostics and checksum-verified delivery archives. Dependabot checks npm and Actions updates monthly.
-
-## Contributing
-
-Use descriptive branches such as `feat/project-gallery`, `fix/mobile-menu` or `docs/readme`. Follow the existing HTML/CSS/JavaScript conventions, make focused commits and open a pull request against `main` with a clear description and validation notes.
-
-Run `npm run check` and `npm run build` before requesting review. For interface or media changes, also run the relevant browser checks and include desktop/mobile screenshots. Keep CI passing and preserve client asset attribution.
-
-## License
-
-Proprietary client project developed by **[Quentagon](https://quentagon.com/)** for **DKS Builders**. No open-source license is granted by this repository. Client assets and third-party trademarks retain their respective owners’ rights; bundled third-party software retains its own license notices.
+GitHub CI runs on pushes and pull requests. This local implementation is not pushed to the source remote: a new destination repository must be supplied before migration. Hosting security headers are configured in `next.config.ts`. Automated accessibility checks complement, rather than replace, manual accessibility review.
