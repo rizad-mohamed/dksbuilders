@@ -8,6 +8,7 @@ import { Services } from "@/components/services";
 import { Projects } from "@/components/projects";
 import { Process } from "@/components/process";
 import { Contact } from "@/components/contact";
+import { Location } from "@/components/location";
 export default function Home() {
   return (
     <main id="main">
@@ -20,6 +21,7 @@ export default function Home() {
       <Services />
       <Process />
       <Contact />
+      <Location />
       <MotionEnhancer />
       <GlareEnhancer />
     </main>

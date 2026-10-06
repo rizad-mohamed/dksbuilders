@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Header } from "@/components/header";
 import { WhatsAppLink } from "@/components/whatsapp-link";
 import { Footer } from "@/components/footer";
+import { ScrollProgress } from "@/components/scroll-progress";
 import "./globals.css";
 
 const sans = localFont({
@@ -64,6 +65,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
+        <ScrollProgress />
         {children}
         <Footer />
         <WhatsAppLink />

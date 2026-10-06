@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Reveal } from "./motion";
 import { ProjectGallery } from "./project-gallery";
+import { DecodeText } from "./decode-text";
 export function Projects() {
   return (
     <section
@@ -14,7 +15,9 @@ export function Projects() {
           <div className="eyebrow">
             <span>04 /</span> SELECTED WORK
           </div>
-          <h2 id="projects-title">Places that matter.</h2>
+          <h2 id="projects-title">
+            <DecodeText text="Places that matter." />
+          </h2>
         </Reveal>
         <Link prefetch={false} href="/projects" className="text-link">
           Project portfolio

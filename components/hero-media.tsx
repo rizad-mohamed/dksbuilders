@@ -12,6 +12,9 @@ export function HeroMedia() {
     const media = video.current;
     if (!media) return;
     let inView = false;
+    let posterReady = false;
+    let disposed = false;
+    let paintFrame = 0;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     function play() {
       if (
@@ -19,7 +22,8 @@ export function HeroMedia() {
         reduced.matches ||
         userPaused.current ||
         !inView ||
-        document.hidden
+        document.hidden ||
+        !posterReady
       )
         return;
       if (!media.getAttribute("src"))
@@ -40,6 +44,19 @@ export function HeroMedia() {
       { threshold: 0.1 },
     );
     if (host.current) observer.observe(host.current);
+    // Give the high-priority poster a painted frame before downloading video.
+    const poster = host.current?.querySelector("img");
+    void (poster?.decode() ?? Promise.resolve())
+      .catch(() => {})
+      .then(() => {
+        if (disposed) return;
+        paintFrame = requestAnimationFrame(() => {
+          paintFrame = requestAnimationFrame(() => {
+            posterReady = true;
+            play();
+          });
+        });
+      });
     const onVisibility = () => {
       if (document.hidden) media.pause();
       else play();
@@ -51,6 +68,8 @@ export function HeroMedia() {
     document.addEventListener("visibilitychange", onVisibility);
     reduced.addEventListener("change", onMotion);
     return () => {
+      disposed = true;
+      cancelAnimationFrame(paintFrame);
       observer.disconnect();
       media.pause();
       document.removeEventListener("visibilitychange", onVisibility);

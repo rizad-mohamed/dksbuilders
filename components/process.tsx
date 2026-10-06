@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { Reveal } from "./motion";
 import { Parallax } from "./parallax";
+import { ProcessFlow } from "./process-flow";
+import { DecodeText } from "./decode-text";
 export function Process() {
   return (
     <>
@@ -16,7 +18,7 @@ export function Process() {
                 <span>08 /</span> OUR APPROACH
               </div>
               <h2 id="process-title">
-                Thought through.
+                <DecodeText text="Thought through." />
                 <br />
                 Built together.
               </h2>
@@ -37,7 +39,7 @@ export function Process() {
                 </span>
               </Parallax>
             </Reveal>
-            <ol className="process-list">
+            <ProcessFlow>
               {[
                 {
                   title: "Understand your vision.",
@@ -64,7 +66,7 @@ export function Process() {
                   </Reveal>
                 </li>
               ))}
-            </ol>
+            </ProcessFlow>
           </div>
         </div>
       </section>

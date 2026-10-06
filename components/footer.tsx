@@ -35,7 +35,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Designed by Quentagon
+            Developed by Quentagon
             <span className="sr-only"> (opens in a new tab)</span>
           </a>
         </div>

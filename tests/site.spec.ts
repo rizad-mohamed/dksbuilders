@@ -80,9 +80,11 @@ test("mobile menu supports navigation and Escape", async ({ page }) => {
   await expect(menu).toHaveAttribute("aria-expanded", "false");
 });
 
-test("service accordion exposes useful content", async ({ page }) => {
+test("discipline selectors update the image and enquiry", async ({ page }) => {
   await page.goto("/");
-  await page.getByText("Bridge construction", { exact: true }).click();
+  const bridge = page.getByRole("button", { name: "03 Bridge construction" });
+  await bridge.click();
+  await expect(bridge).toHaveAttribute("aria-pressed", "true");
   await expect(
     page.getByText(
       "Civil engineering and construction for bridge infrastructure.",
@@ -91,6 +93,186 @@ test("service accordion exposes useful content", async ({ page }) => {
   await expect(
     page.getByAltText("Illustrative bridge construction in Sri Lanka"),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Discuss this service" }),
+  ).toHaveAttribute("href", /Enquiry%3A%20Bridge%20construction/);
+  await page.getByRole("button", { name: "06 House construction" }).focus();
+  await page.keyboard.press("Enter");
+  await expect(
+    page.getByAltText("Illustrative house construction in Sri Lanka"),
+  ).toBeVisible();
+});
+
+test("location map and directions use the supplied business pin", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.locator("#location").scrollIntoViewIfNeeded();
+  await expect(page.locator("#location iframe")).toHaveAttribute(
+    "src",
+    "https://www.google.com/maps?cid=10645268318811382215&output=embed",
+  );
+  await expect(
+    page.getByRole("link", { name: /Open in Google Maps/ }),
+  ).toHaveAttribute("href", "https://maps.app.goo.gl/wJrPxJbBJ46a32pR7");
+  await expect(
+    page.getByRole("link", { name: /Get directions/ }),
+  ).toHaveAttribute("href", "https://maps.app.goo.gl/wJrPxJbBJ46a32pR7");
+});
+
+test("scroll progress tracks the page and career imagery reveals gradually", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.addStyleTag({
+    content: "html { scroll-behavior: auto !important; }",
+  });
+  const progress = () =>
+    page
+      .locator(".scroll-progress-fill")
+      .evaluate(
+        (element) => new DOMMatrix(getComputedStyle(element).transform).a,
+      );
+  await expect.poll(progress).toBeLessThan(0.01);
+  const image = page.locator(".career-image-reveal");
+  const opacity = () =>
+    image.evaluate((element) => Number(getComputedStyle(element).opacity));
+  const top = await image.evaluate(
+    (element) => element.getBoundingClientRect().top + window.scrollY,
+  );
+  await page.evaluate(
+    (top) => window.scrollTo(0, top - innerHeight * 0.95),
+    top,
+  );
+  await expect.poll(opacity).toBeLessThan(0.25);
+  await page.evaluate(
+    (top) => window.scrollTo(0, top - innerHeight * 0.7),
+    top,
+  );
+  await expect.poll(opacity).toBeGreaterThan(0.4);
+  await expect.poll(opacity).toBeLessThan(0.8);
+  await page.evaluate(
+    (top) => window.scrollTo(0, top - innerHeight * 0.4),
+    top,
+  );
+  await expect.poll(opacity).toBe(1);
+  await page.evaluate(() =>
+    window.scrollTo(0, document.documentElement.scrollHeight),
+  );
+  await expect.poll(progress).toBeGreaterThan(0.99);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await expect.poll(opacity).toBe(1);
+});
+
+for (const width of [375, 1280]) {
+  test(`process flow follows scrolling at ${width}px and respects reduced motion`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+    await page.addStyleTag({
+      content: "html { scroll-behavior: auto !important; }",
+    });
+    const flow = page.locator(".process-flow");
+    const dimensions = await flow.evaluate((element) => ({
+      top: element.getBoundingClientRect().top + scrollY,
+      height: element.getBoundingClientRect().height,
+    }));
+    const scale = () =>
+      page
+        .locator(".process-rail-fill")
+        .evaluate(
+          (element) => new DOMMatrix(getComputedStyle(element).transform).d,
+        );
+    await page.evaluate(
+      ({ top }) => window.scrollTo(0, top - innerHeight * 0.8),
+      dimensions,
+    );
+    await expect.poll(scale).toBeLessThan(0.05);
+    await page.evaluate(
+      ({ top, height }) =>
+        window.scrollTo(
+          0,
+          top - innerHeight * 0.75 + (height + innerHeight * 0.15) * 0.5,
+        ),
+      dimensions,
+    );
+    await expect.poll(scale).toBeGreaterThan(0.45);
+    await expect.poll(scale).toBeLessThan(0.55);
+    await expect(flow.locator('li[data-complete="true"]')).toHaveCount(2);
+    await page.evaluate(
+      ({ top, height }) =>
+        window.scrollTo(0, top + height - innerHeight * 0.55),
+      dimensions,
+    );
+    await expect.poll(scale).toBe(1);
+    await expect(flow.locator('li[data-complete="true"]')).toHaveCount(4);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await expect.poll(scale).toBe(1);
+  });
+}
+
+test("heading decoding preserves accessible text and settles precisely", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const heading = page.getByRole("heading", {
+    name: "Expertise, across every discipline.",
+  });
+  const decode = heading.locator(".decode-text");
+  await heading.scrollIntoViewIfNeeded();
+  await expect(decode).toHaveAttribute("data-decoding", "true");
+  await expect(heading).toHaveAccessibleName(
+    "Expertise, across every discipline.",
+  );
+  await expect(decode).toHaveAttribute("data-decoding", "false");
+  expect(await decode.locator(".decode-glyph").allTextContents()).toEqual(
+    "every discipline.".split(""),
+  );
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.reload();
+  await heading.scrollIntoViewIfNeeded();
+  await expect(decode).toHaveAttribute("data-decoding", "false");
+  await expect(heading).toHaveAccessibleName(
+    "Expertise, across every discipline.",
+  );
+});
+
+test("selected photography has restrained parallax that stops for reduced motion", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.addStyleTag({
+    content: "html { scroll-behavior: auto !important; }",
+  });
+  const photo = page.locator(".process-photo");
+  const top = await photo.evaluate(
+    (element) => element.getBoundingClientRect().top + scrollY,
+  );
+  const translation = () =>
+    photo
+      .locator(".parallax-inner")
+      .evaluate(
+        (element) => new DOMMatrix(getComputedStyle(element).transform).f,
+      );
+  await page.evaluate(
+    (top) => window.scrollTo(0, top - innerHeight * 0.9),
+    top,
+  );
+  await expect.poll(translation).toBeLessThan(-5);
+  const before = await translation();
+  await page.evaluate(
+    (top) => window.scrollTo(0, top - innerHeight * 0.2),
+    top,
+  );
+  await expect.poll(translation).toBeGreaterThan(before + 5);
+  await expect
+    .poll(async () => Math.abs(await translation()))
+    .toBeLessThanOrEqual(12);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect.poll(translation).toBe(0);
 });
 
 test("primary contact links use the preserved contact details", async ({

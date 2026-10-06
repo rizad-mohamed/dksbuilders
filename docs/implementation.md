@@ -1,33 +1,51 @@
-﻿# DKS brand refresh — implementation decisions
+# DKS Builders — implementation decisions
 
-The latest user request takes precedence over instructions in the earlier pasted brief. The full-site screenshot and supplied official DKS logo establish the current visual direction. The earlier light architectural concept informs the three-area service row and careers composition.
+Updated 6 October 2026. The current implementation uses Next.js App Router, React, TypeScript and native CSS. The original asset record remains in [content and asset provenance](content-and-assets.md).
 
-## Brand and hierarchy
+## Brand and visual flow
 
-The shared palette is white, DKS blue (#0074be), deep navy (#103448) and restrained engineering yellow (#facb63). DM Sans is the primary display/interface family, matching the modern architectural reference. Newsreader is limited to the three service titles, following the compact reference. Buttons use pill corners; primary containers use 22px corners, nested media 16px and small marks 12px. Projects and Careers keep their authorized Coming Soon scope and share the header, transparent logo, palette, drawing motif and controls.
+The palette preserves DKS blue (`#0074be`), deep navy (`#103448`), light technical surfaces and restrained engineering yellow (`#facb63`). DM Sans is the main display and interface font; Newsreader is limited to the Residential, Commercial and Infrastructure highlight titles. Both fonts are self-hosted through `next/font/local`.
 
-Homepage order: hero → three key areas → monochrome trusted brands (third section) → completed-project photography carousel and project register → Build your career with DKS → company and interactive structural study → six services → approach → contact.
+Primary containers use 8px corners, nested surfaces generally use 3–6px corners, and the floating glass navigation and mobile menu have square edges. Glass has a solid background fallback. Existing focus indicators, accessible navigation labels and mobile Escape behavior are preserved.
 
-Residential, Commercial and Infrastructure reflect the documented company capabilities. The latest reference replaces the carousel with a framed two-over-three gallery using all five supplied archive photographs: 01, 03, 04, 05 and 06. The heading is Places that matter, covering both construction stages and finished spaces without implying that every photograph depicts a completed project. No photograph is assigned to a named register entry without a source mapping. No completion dates, financial figures, accreditation or testimonials are invented.
+Headings remain left aligned while visual weight varies between sections: the project introduction is offset above an asymmetric gallery, the desktop career photograph sits left of its copy, and process steps sit left of their introduction. Mobile collapses these compositions into a clear reading order.
 
-## Logo
+Homepage order: hero → three key areas → trusted brands → project photographs and register → careers invitation → company and structural study → construction disciplines → approach → contact → office map. Projects and Careers retain their intentional Coming Soon routes.
 
-The supplied DKS mark was isolated with built-in imagegen background extraction, then trimmed and encoded as a transparent PNG: `public/assets/dks-logo-transparent.png`. Its alpha channel was verified. The header and footer use this full mark without a separate invented wordmark or background container.
+## Services and project evidence
 
-Final image-edit prompt: “Remove only the black background of the official logo to real transparent alpha PNG. Preserve the exact existing logo shapes, typography, arrangement, blue and grey colours and tagline verbatim. Do not redesign or stylize. Fit the full logo closely in the output with a small transparent margin, no huge blank canvas, no added shadow, no backdrop, no checkerboard baked into pixels.” The edit target was the supplied blue/grey DKS BUILDERS mark and Making Dreams Come to Life tagline; the website screenshot was excluded as an edit target. The original generated asset is preserved outside the project; its optimized project copy is committed with the site.
+Six discipline selectors share a photograph, description and real email enquiry link. Building, road, bridge, pipe, water-flow and house icons come from the installed Phosphor family. Decorative icons are hidden from assistive technology; buttons expose their selected state and control the live description. Service names use larger, heavier type, with a yellow rail and highlighted icon on the selected box.
 
-## Engineering detail and motion
+The gallery uses the five supplied archive photographs and keeps their original captions. Its two leading photographs have unequal desktop widths; the remaining three use equal columns. Photographs are not assigned to named project-register entries without a verified mapping. No completion dates, awards, financial figures or testimonials are invented.
 
-Subtle blue grids, datum marks, section rules and a code-native axonometric drawing connect the sections. Drawing dimensions are illustrative and labelled CONCEPT / NOT TO SCALE. The retained Three.js structural study supports Plan, Frame and Enclosure, pointer response and rotation pause. It initializes near the viewport, caps pixel density, stops offscreen/in hidden tabs and disposes GPU resources. Reduced-motion and data-saving visitors explicitly opt into it.
+Partner logos retain their supplied colours. The DKS logo uses the supplied transparent PNG without an invented wordmark or background. Illustrative photographs, film, drawing dimensions and 3D geometry remain labelled as illustrative.
 
-The hero plays the muted responsive film automatically when visible. It pauses offscreen/in hidden tabs, resumes on returning when the visitor has not deliberately paused, and preserves that deliberate pause. Reduced motion starts with a static opening-frame poster and an optional Play control. Unavailable media retains the poster; browser autoplay rejection retains the Play control.
+## Precise motion and accessibility
 
-Native CSS view timelines provide stronger hero and photo parallax with static fallbacks. Motion Mini progressively adds section reveals. Navigation, buttons, accordion images, gallery photography and partner marks have restrained microanimations. Pointer glare uses CSS variables updated through requestAnimationFrame, without React updates per pointer frame. Reduced motion disables parallax and glare.
+- The page progress bar uses a native scroll timeline where supported. Its JavaScript fallback loads Motion only when needed.
+- Photo parallax stays within 12px in either direction. Its DOM animation engine loads when the associated section approaches the viewport.
+- Career imagery gradually reveals from 18% to full opacity as it enters view. The effect has a visible fallback if animation loading fails.
+- The approach rail measures the numbered step positions, fills with scroll progress and highlights reached nodes. ResizeObserver maintains alignment on responsive layouts.
+- Three selected headings run a single 650ms decoding pass. Only a short wave of characters changes at a time; original character widths and accessible heading text remain stable.
+- Section reveals use Motion Mini on demand. Hover feedback uses short CSS transitions; pointer glare updates CSS variables without per-frame React state updates.
+- Reduced motion disables decoding, parallax and glare, keeps career imagery fully visible and displays the complete process connection.
 
-The gallery is server-rendered and has no carousel runtime. Its two large photos are capped at 315px high and the three supporting photos at 225px; mobile photos are 215px high. Service photos are capped at 365px and process photos at 245px, with a more compact careers composition. Fixed number badges sit outside the parallax layer. The connected partner-logo row preserves the original colours, including hover. Stronger square grids and drafting marks echo the latest screenshots. Yellow accents highlight active services, their real email enquiry links, hero emphasis and the contact invitation.
+Continuous scroll effects update DOM styles rather than React state. Observers, frame callbacks, media-query listeners and animation subscriptions are cleaned up on unmount.
 
-A server-rendered WhatsApp link sits in the lower-right corner on all pages. It uses the existing official-site destination, https://wa.me/94777552416, and opens only when the visitor clicks it. The message is prefilled rather than automatically sent. Its accessible label identifies WhatsApp and the new tab; safe-area spacing and footer clearance keep it usable on mobile.
+## Hero film and structural study
 
-## Delivery
+The muted hero film selects mobile or desktop media, autoplays when visible, pauses offscreen or when the tab is hidden, and preserves a visitor's deliberate pause. The high-priority poster gets a painted frame before autoplay downloads begin. Reduced motion starts with the poster and optional Play control; failed or blocked playback keeps a usable fallback.
 
-All work remains local. No remote publishing or push is authorized by this refresh. The source remote remains for provenance until the requested new destination is provided. Existing contact details and the asset provenance record are preserved.
+The Three.js study supports Plan, Frame and Enclosure, pointer response and rotation controls. It initializes near the viewport, caps pixel density, stops offscreen/in hidden tabs and disposes GPU resources. Reduced-motion and data-saving visitors explicitly opt in.
+
+## Contact and location
+
+Existing phone numbers, email addresses and the Elpitiya office address are preserved. The final section embeds the exact business pin resolved from the supplied Google Maps link; both directions links share that destination. The iframe is lazy loaded and has an accessible title.
+
+WhatsApp remains available across routes and uses the supplied phone number with a prefilled message. It opens only on visitor interaction and never sends a message automatically. Safe-area spacing and footer clearance preserve mobile usability. The developer credit reads “Developed by Quentagon” and is centered.
+
+## Architecture and delivery
+
+Server-rendered routes compose isolated client components for navigation, media and motion. Shared content and the office destination live in `lib/`; images, film and licensed fonts live in `public/`. Optional `NEXT_PUBLIC_SITE_URL` supplies canonical and sitemap URLs for the confirmed deployment origin.
+
+The project deploys as a Next.js application on a compatible host. GitHub Actions checks dependency advisories, lint, formatting, types, production builds, Playwright/axe and Lighthouse, and retains reports. The user has authorized committing and pushing the complete project to `rizad-mohamed/dksbuilders`. Source publication and website hosting are separate operations; no website deployment is included in this release.

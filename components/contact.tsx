@@ -1,5 +1,6 @@
 import { ArrowRightIcon, ArrowUpRightIcon } from "@phosphor-icons/react/ssr";
 import { Reveal } from "./motion";
+import { officeMapUrl } from "@/lib/location";
 export function Contact() {
   return (
     <section
@@ -64,7 +65,7 @@ export function Contact() {
           </address>
           <a
             className="text-link"
-            href="https://maps.app.goo.gl/6tN63iBsDXEMGAsf9"
+            href={officeMapUrl}
             target="_blank"
             rel="noopener noreferrer"
           >

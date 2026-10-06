@@ -7,7 +7,9 @@ try {
     viewport: { width: 1440, height: 1000 },
     reducedMotion: "reduce",
   });
-  await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
+  await page.goto(process.env.PREVIEW_URL || "http://localhost:3000", {
+    waitUntil: "domcontentloaded",
+  });
   for (const image of await page.locator("img").all()) {
     await image.scrollIntoViewIfNeeded();
     await image.evaluate((element) => element.decode());
