@@ -14,6 +14,7 @@ import {
 import { services } from "@/lib/content";
 import { Reveal } from "./motion";
 import { DecodeText } from "./decode-text";
+import { Parallax } from "./parallax";
 const disciplineIcons = {
   building: BuildingsIcon,
   highway: RoadHorizonIcon,
@@ -37,7 +38,7 @@ export function Services() {
         <div className="section-head">
           <Reveal>
             <div className="eyebrow">
-              <span>07 /</span> WHAT WE DO
+              <span>06 /</span> WHAT WE DO
             </div>
             <h2 id="services-title">
               Expertise, across
@@ -53,14 +54,14 @@ export function Services() {
         <div className="services-layout">
           <div className="service-preview">
             <div className="service-image">
-              <div className="service-frame" key={selected.image}>
+              <Parallax className="service-frame" key={selected.image}>
                 <Image
                   src={`/assets/${selected.image}-1280.webp`}
                   fill
                   sizes="(max-width: 767px) 100vw, 40vw"
                   alt={`Illustrative ${selected.title.toLowerCase()} in Sri Lanka`}
                 />
-              </div>
+              </Parallax>
 
               <span className="image-credit">
                 Illustrative imagery · not project evidence

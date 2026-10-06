@@ -1,6 +1,106 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+test("projects combine search and filters, sort and recover from empty results", async ({
+  page,
+}) => {
+  await page.goto("/projects");
+  const cards = page.locator(".listing-card");
+  await expect(cards).toHaveCount(3);
+  await page.getByLabel("Sector", { exact: true }).selectOption("Commercial");
+  await page.getByLabel("Location", { exact: true }).selectOption("Wariyapola");
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first()).toContainText("Bank of Ceylon");
+  await page.getByRole("searchbox").fill("unmatched");
+  await expect(cards).toHaveCount(0);
+  await page.getByRole("button", { name: "Show all projects" }).click();
+  await expect(cards).toHaveCount(3);
+  await page.getByLabel("Sort by").selectOption("az");
+  await expect(cards.first()).toContainText("Bank of Ceylon");
+  await page.getByLabel("Sort by").selectOption("za");
+  await expect(cards.first()).toContainText("Labour Office");
+  await page.getByRole("searchbox").fill("steel");
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first().getByRole("link")).toHaveAttribute(
+    "href",
+    /Project%20enquiry/,
+  );
+});
+
+test("careers filters expressions of interest and provides an email application", async ({
+  page,
+}) => {
+  await page.goto("/careers");
+  await expect(page.getByLabel("Application information")).toContainText(
+    "rather than advertised vacancies",
+  );
+  const cards = page.locator(".listing-card");
+  await expect(cards).toHaveCount(4);
+  await page
+    .getByLabel("Work area", { exact: true })
+    .selectOption("Building systems");
+  await expect(cards).toHaveCount(2);
+  await page
+    .getByLabel("Discipline", { exact: true })
+    .selectOption("Electrical");
+  await expect(cards).toHaveCount(1);
+  await expect(
+    cards.getByRole("link", { name: "Introduce yourself" }),
+  ).toHaveAttribute(
+    "href",
+    /Career%20expression%20of%20interest%3A%20Electrical/,
+  );
+  await page.getByRole("button", { name: "Reset filters" }).click();
+  await expect(cards).toHaveCount(4);
+  await page.getByRole("searchbox").fill("finishing");
+  await expect(cards).toHaveCount(1);
+  await expect(cards.first()).toContainText("Interior works");
+});
+
+test("careers is eighth and Selected Work starts at the left gutter", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/");
+  const sections = page.locator("#main > section");
+  await expect(sections.nth(6)).toHaveAttribute("id", "approach");
+  await expect(sections.nth(7)).toHaveAttribute(
+    "aria-labelledby",
+    "career-title",
+  );
+  await expect(sections.nth(7).locator(".eyebrow span")).toHaveText("08 /");
+  const alignment = await page.locator("#projects").evaluate((section) => {
+    const heading = section.querySelector("h2")!;
+    return Math.abs(
+      heading.getBoundingClientRect().left -
+        section.getBoundingClientRect().left,
+    );
+  });
+  expect(alignment).toBeLessThan(2);
+  await expect(
+    page.getByRole("link", { name: "Project portfolio", exact: true }),
+  ).toHaveClass(/portfolio-button/);
+});
+
+for (const width of [320, 768, 1024, 1920, 2560]) {
+  test(`directory pages remain fluid at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    for (const path of ["/projects", "/careers"]) {
+      await page.goto(path);
+      await expect(page.getByRole("searchbox")).toBeVisible();
+      await page.locator(".listing-card").last().scrollIntoViewIfNeeded();
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth > innerWidth,
+        ),
+      ).toBe(false);
+      const bounds = await page.locator("#main").boundingBox();
+      expect(bounds!.width).toBeGreaterThan(width * 0.85);
+    }
+  });
+}
+
 test("homepage, project portfolio, and careers are navigable", async ({
   page,
 }) => {
@@ -22,7 +122,7 @@ test("homepage, project portfolio, and careers are navigable", async ({
     page.getByRole("heading", { name: "Our work, in focus." }),
   ).toBeVisible();
   await expect(
-    page.getByText("DKS BUILDERS / COMING SOON", { exact: true }),
+    page.getByRole("search", { name: "Projects", exact: true }),
   ).toBeVisible();
   await page.getByRole("link", { name: "Back to home" }).click();
   await page
@@ -201,6 +301,19 @@ for (const width of [375, 1280]) {
     await expect.poll(scale).toBeGreaterThan(0.45);
     await expect.poll(scale).toBeLessThan(0.55);
     await expect(flow.locator('li[data-complete="true"]')).toHaveCount(2);
+    await expect(flow.locator('li[data-current="true"]')).toHaveCount(1);
+    await expect(flow.locator(".process-cursor")).toHaveCSS("opacity", "1");
+    const cursorProgress = await flow
+      .locator(".process-cursor")
+      .evaluate((element) => {
+        const rail = element.parentElement!;
+        return (
+          new DOMMatrix(getComputedStyle(element).transform).f /
+          rail.getBoundingClientRect().height
+        );
+      });
+    expect(cursorProgress).toBeGreaterThan(0.45);
+    expect(cursorProgress).toBeLessThan(0.55);
     await page.evaluate(
       ({ top, height }) =>
         window.scrollTo(0, top + height - innerHeight * 0.55),
@@ -208,9 +321,18 @@ for (const width of [375, 1280]) {
     );
     await expect.poll(scale).toBe(1);
     await expect(flow.locator('li[data-complete="true"]')).toHaveCount(4);
+    await expect(flow.locator(".process-cursor")).toHaveCSS("opacity", "0");
+    await page.evaluate(
+      ({ top }) => window.scrollTo(0, top - innerHeight * 0.8),
+      dimensions,
+    );
+    await expect.poll(scale).toBeLessThan(0.05);
+    await expect(flow.locator('li[data-current="true"]')).toHaveCount(0);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.evaluate(() => window.scrollTo(0, 0));
     await expect.poll(scale).toBe(1);
+    await expect(flow.locator('li[data-complete="true"]')).toHaveCount(4);
+    await expect(flow.locator(".process-cursor")).toHaveCSS("opacity", "0");
   });
 }
 

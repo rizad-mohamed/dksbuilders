@@ -6,6 +6,7 @@ export function ProcessFlow({ children }: { children: React.ReactNode }) {
   const host = useRef<HTMLDivElement>(null);
   const rail = useRef<HTMLSpanElement>(null);
   const fill = useRef<HTMLSpanElement>(null);
+  const cursor = useRef<HTMLSpanElement>(null);
   const list = useRef<HTMLOListElement>(null);
   useEffect(() => {
     const element = host.current;
@@ -17,11 +18,24 @@ export function ProcessFlow({ children }: { children: React.ReactNode }) {
     const rows = Array.from(steps.querySelectorAll<HTMLElement>("li"));
     let positions: number[] = [];
     let progress = 0;
+    let distance = 0;
     let stop: (() => void) | undefined;
     const paint = () => {
       line.style.transform = `scaleY(${progress})`;
+      if (cursor.current) {
+        cursor.current.style.transform = `translateY(${progress * distance}px)`;
+        cursor.current.style.opacity = String(
+          !reduced.matches && progress > 0 && progress < 1 ? 1 : 0,
+        );
+      }
+      const current = positions.findLastIndex(
+        (position) => progress >= position,
+      );
       rows.forEach((row, i) => {
         row.dataset.complete = String(progress > 0 && progress >= positions[i]);
+        row.dataset.current = String(
+          !reduced.matches && progress > 0 && progress < 1 && i === current,
+        );
       });
     };
     const measure = () => {
@@ -32,7 +46,7 @@ export function ProcessFlow({ children }: { children: React.ReactNode }) {
           .getBoundingClientRect();
         return number.top + number.height / 2 - box.top;
       });
-      const distance = centers.at(-1)! - centers[0];
+      distance = centers.at(-1)! - centers[0];
       track.style.top = `${centers[0]}px`;
       track.style.height = `${distance}px`;
       positions = centers.map((center) => (center - centers[0]) / distance);
@@ -67,6 +81,7 @@ export function ProcessFlow({ children }: { children: React.ReactNode }) {
     <div ref={host} className="process-flow">
       <span ref={rail} className="process-rail" aria-hidden="true">
         <span ref={fill} className="process-rail-fill" />
+        <span ref={cursor} className="process-cursor" />
       </span>
       <ol ref={list} className="process-list">
         {children}

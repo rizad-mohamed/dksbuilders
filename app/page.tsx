@@ -16,10 +16,10 @@ export default function Home() {
       <ServiceHighlights />
       <TrustedBrands />
       <Projects />
-      <Careers />
       <Company />
       <Services />
       <Process />
+      <Careers />
       <Contact />
       <Location />
       <MotionEnhancer />

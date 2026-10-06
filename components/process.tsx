@@ -15,7 +15,7 @@ export function Process() {
           <div className="process-grid">
             <Reveal className="process-intro">
               <div className="eyebrow">
-                <span>08 /</span> OUR APPROACH
+                <span>07 /</span> OUR APPROACH
               </div>
               <h2 id="process-title">
                 <DecodeText text="Thought through." />

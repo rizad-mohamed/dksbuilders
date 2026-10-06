@@ -3,6 +3,7 @@ import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Reveal } from "./motion";
 import { ProjectGallery } from "./project-gallery";
 import { DecodeText } from "./decode-text";
+import { projectRecords } from "@/lib/listings";
 export function Projects() {
   return (
     <section
@@ -19,7 +20,11 @@ export function Projects() {
             <DecodeText text="Places that matter." />
           </h2>
         </Reveal>
-        <Link prefetch={false} href="/projects" className="text-link">
+        <Link
+          prefetch={false}
+          href="/projects"
+          className="button portfolio-button"
+        >
           Project portfolio
           <ArrowRightIcon size={17} />
         </Link>
@@ -33,26 +38,12 @@ export function Projects() {
         entries in the project register.
       </p>
       <div className="register">
-        {[
-          {
-            type: "INSTITUTIONAL / MORATUWA",
-            name: "Faculty of Engineering Multipurpose Building",
-            copy: "Completion of balance work involving prefabricated steel, University of Moratuwa.",
-          },
-          {
-            type: "COMMERCIAL / WARIYAPOLA",
-            name: "Bank of Ceylon Branch Building",
-            copy: "Construction of a new branch building at Wariyapola.",
-          },
-          {
-            type: "GOVERNMENT / HATTON",
-            name: "Labour Office",
-            copy: "Construction of the proposed Labour Office at Hatton.",
-          },
-        ].map((item) => (
-          <article key={item.name}>
-            <div className="eyebrow">{item.type}</div>
-            <h3>{item.name}</h3>
+        {projectRecords.map((item) => (
+          <article key={item.title}>
+            <div className="eyebrow">
+              {item.category} / {item.area}
+            </div>
+            <h3>{item.title}</h3>
             <p>{item.copy}</p>
           </article>
         ))}

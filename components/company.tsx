@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import { Reveal } from "./motion";
 import { StructuralStudy } from "./structural-study";
+import { DecodeText } from "./decode-text";
 export function Company() {
   return (
     <section
@@ -11,10 +12,10 @@ export function Company() {
       <div className="company-grid">
         <Reveal className="company-copy">
           <div className="eyebrow">
-            <span>06 /</span> THE COMPANY
+            <span>05 /</span> THE COMPANY
           </div>
           <h2 id="company-title">
-            A clear vision.
+            <DecodeText text="A clear vision." />
             <br />A considered build.
           </h2>
           <p>

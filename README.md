@@ -23,11 +23,11 @@ Status as of **6 October 2026**. Package version: **2.0.0**.
 | Area               | Current status                                                                                                                             |
 | :----------------- | :----------------------------------------------------------------------------------------------------------------------------------------- |
 | Homepage           | Implemented, including company, services, project photography, careers invitation, approach, contact and office map.                       |
-| Projects & Careers | Separate routes with intentional **Coming Soon** pages.                                                                                    |
+| Projects & Careers | Dedicated filterable project register and careers expressions of interest.                                                                 |
 | Visual identity    | DKS blue, navy and engineering yellow; sharper corners, square glass navigation and asymmetric layouts.                                    |
 | Services           | Six selectable disciplines with matching engineering icons, prominent titles, image previews and email enquiries.                          |
 | Interaction        | Scroll progress, connected process flow, career image reveal, restrained parallax and brief heading decoding.                              |
-| Local verification | Production build, lint, formatting and strict TypeScript passed; all **28 browser UAT tests** passed against the current production build. |
+| Local verification | Production build, lint, formatting and strict TypeScript passed; all **36 browser UAT tests** passed against the current production build. |
 | Latest icon update | TypeScript, component lint, keyboard selection, service accessibility and card fitting at 320, 375, 768 and 1440 px passed.                |
 | Delivery           | Source publication to this repository is authorized. GitHub Actions validates each push; website deployment remains separate.              |
 
@@ -115,7 +115,7 @@ Install Chromium before browser checks with `npx playwright install chromium`; L
 | :----------------------------------- | :----------------------------------------------------------------------------------- |
 | `app/page.tsx`                       | Homepage section composition.                                                        |
 | `app/layout.tsx` / `app/globals.css` | Shared layout, metadata, fonts, theme and responsive styling.                        |
-| `app/projects/` / `app/careers/`     | Coming Soon routes and their metadata.                                               |
+| `app/projects/` / `app/careers/`     | Filterable Projects and Careers pages with route metadata.                           |
 | `app/robots.ts` / `app/sitemap.ts`   | Search crawler rules and sitemap generation.                                         |
 | `components/`                        | Page sections, navigation, media, service icons and isolated interactive components. |
 | `lib/content.ts` / `lib/location.ts` | Shared service content and exact office map destination.                             |
@@ -143,7 +143,7 @@ Security headers are defined in `next.config.ts`. Ensure hero video delivery pre
 flowchart TD
   A[Next.js App Router] --> B[Shared layout, fonts and metadata]
   A --> C[Homepage sections]
-  A --> D[Projects and Careers: Coming Soon]
+  A --> D[Projects and Careers: filterable directories]
   C --> E[Client components: navigation, services and motion]
   C --> F[Local photography and responsive hero film]
   E --> G[Optional Three.js structural study]

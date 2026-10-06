@@ -16,7 +16,7 @@ export function Careers() {
       <Reveal className="career-copy">
         <EngineeringDrawing />
         <div className="eyebrow">
-          <span>05 /</span> OUR PEOPLE
+          <span>08 /</span> OUR PEOPLE
         </div>
         <h2 id="career-title">
           Build your career

@@ -14,6 +14,7 @@ export function DecodeText({ text }: { text: string }) {
       cancelAnimationFrame(frame);
       glyphs.forEach((glyph, i) => {
         glyph.textContent = text[i];
+        delete glyph.dataset.scrambled;
       });
       element.dataset.decoding = "false";
     };
@@ -33,12 +34,12 @@ export function DecodeText({ text }: { text: string }) {
           const cursor =
             Math.floor(((now - start) / 650) * (text.length + 4)) - 4;
           glyphs.forEach((glyph, i) => {
-            glyph.textContent =
-              /[a-z]/i.test(text[i]) && i >= cursor && i < cursor + 4
-                ? alphabet[
-                    (i + Math.floor((now - start) / 65)) % alphabet.length
-                  ]
-                : text[i];
+            const scrambled =
+              /[a-z]/i.test(text[i]) && i >= cursor && i < cursor + 4;
+            glyph.dataset.scrambled = String(scrambled);
+            glyph.textContent = scrambled
+              ? alphabet[(i + Math.floor((now - start) / 65)) % alphabet.length]
+              : text[i];
           });
           frame = requestAnimationFrame(tick);
         };
