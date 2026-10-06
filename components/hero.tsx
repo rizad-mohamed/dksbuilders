@@ -8,7 +8,7 @@ import {
 import { HeroMedia } from "./hero-media";
 export function Hero() {
   return (
-    <section className="hero wrap" aria-labelledby="hero-title">
+    <section className="hero" aria-labelledby="hero-title">
       <HeroMedia />
       <div className="hero-shade" />
       <div className="hero-copy">
@@ -49,13 +49,6 @@ export function Hero() {
         </a>
         <span>ELPITIYA, SRI LANKA</span>
         <span>Illustrative cinematic imagery</span>
-      </div>
-      <div className="hero-datum" aria-hidden="true">
-        <span>A</span>
-        <i />
-        <span>B</span>
-        <i />
-        <span>C</span>
       </div>
     </section>
   );

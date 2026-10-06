@@ -27,7 +27,7 @@ Status as of **6 October 2026**. Package version: **2.0.0**.
 | Visual identity    | DKS blue, navy and engineering yellow; sharper corners, square glass navigation and asymmetric layouts.                                    |
 | Services           | Six selectable disciplines with matching engineering icons, prominent titles, image previews and email enquiries.                          |
 | Interaction        | Scroll progress, connected process flow, career image reveal, restrained parallax and brief heading decoding.                              |
-| Local verification | Production build, lint, formatting and strict TypeScript passed; all **36 browser UAT tests** passed against the current production build. |
+| Local verification | Production build, lint, formatting and strict TypeScript passed; all **40 browser UAT tests** passed against the current production build. |
 | Latest icon update | TypeScript, component lint, keyboard selection, service accessibility and card fitting at 320, 375, 768 and 1440 px passed.                |
 | Delivery           | Source publication to this repository is authorized. GitHub Actions validates each push; website deployment remains separate.              |
 

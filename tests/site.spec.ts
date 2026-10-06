@@ -1,6 +1,36 @@
 import { test, expect } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
+for (const viewport of [
+  { width: 375, height: 812 },
+  { width: 768, height: 1024 },
+  { width: 1280, height: 720 },
+  { width: 1440, height: 900 },
+]) {
+  test(`hero fills the visitor's screen at ${viewport.width}px and approach has a gap`, async ({
+    page,
+  }) => {
+    await page.setViewportSize(viewport);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    const hero = await page.locator(".hero").boundingBox();
+    expect(hero!.x).toBe(0);
+    expect(hero!.y).toBe(0);
+    expect(hero!.width).toBe(viewport.width);
+    expect(hero!.height).toBe(viewport.height);
+    await expect(page.locator(".hero video")).toHaveCSS("object-fit", "cover");
+    await expect(page.locator(".hero-datum")).toHaveCount(0);
+    const header = await page.locator(".site-header").boundingBox();
+    const heading = await page.locator("#hero-title").boundingBox();
+    expect(heading!.y).toBeGreaterThan(header!.y + header!.height);
+    const approach = await page.locator("#approach").boundingBox();
+    const careers = await page.locator(".career-banner").boundingBox();
+    expect(careers!.y - approach!.y - approach!.height).toBeGreaterThanOrEqual(
+      40,
+    );
+  });
+}
+
 test("projects combine search and filters, sort and recover from empty results", async ({
   page,
 }) => {

@@ -4,16 +4,16 @@ Verified **6 October 2026** in the Windows workspace using **Node.js 24.19.0** a
 
 ## Quality checks
 
-| Check                                     | Result                                                                                 |
-| :---------------------------------------- | :------------------------------------------------------------------------------------- |
-| ESLint                                    | Passed.                                                                                |
-| Prettier and Git diff checks              | Passed.                                                                                |
-| Strict TypeScript and Next.js route types | Passed.                                                                                |
-| Production build                          | Passed; homepage, Projects and Careers generated successfully.                         |
-| npm dependency audit                      | Zero vulnerabilities across all severity levels.                                       |
-| Playwright UAT                            | **36 tests passed** against an isolated production server.                             |
-| Automated WCAG A/AA checks                | Passed on the homepage, Projects and Careers.                                          |
-| Lighthouse UAT                            | All configured quality gates passed; homepage performance remains an advisory warning. |
+| Check                                     | Result                                                                                       |
+| :---------------------------------------- | :------------------------------------------------------------------------------------------- |
+| ESLint                                    | Passed.                                                                                      |
+| Prettier and Git diff checks              | Passed.                                                                                      |
+| Strict TypeScript and Next.js route types | Passed.                                                                                      |
+| Production build                          | Passed; homepage, Projects and Careers generated successfully.                               |
+| npm dependency audit                      | Zero vulnerabilities across all severity levels.                                             |
+| Playwright UAT                            | **40 tests passed** against an isolated production server.                                   |
+| Automated WCAG A/AA checks                | Passed on the homepage, Projects and Careers.                                                |
+| Lighthouse UAT                            | All configured quality gates passed; Home and Projects performance remain advisory warnings. |
 
 ## Browser acceptance coverage
 
@@ -26,6 +26,7 @@ Verified **6 October 2026** in the Windows workspace using **Node.js 24.19.0** a
 - Process connection progress and reached-step states at mobile and desktop widths.
 - Heading decoding, stable accessible names, resolved text and reduced-motion behavior.
 - Restrained photography parallax and its reduced-motion fallback.
+- Full-viewport hero geometry on mobile, tablet, laptop and desktop; header clearance, removal of the A/B/C overlay and the 40-80px gap between Our Approach and Careers.
 - Film autoplay, mobile media selection, unavailable-media fallback, offscreen pause and persistent visitor pause.
 - Three.js stage controls and rotation pause, plus reduced-motion behavior without automatic heavy loading.
 - Local image loading and WhatsApp destination/new-tab behavior across all routes.
@@ -38,13 +39,13 @@ Default mobile Lighthouse audits ran **three times per route**. The table record
 
 | Route       | Performance | Accessibility | Best practices |     SEO |       CLS |
 | :---------- | ----------: | ------------: | -------------: | ------: | --------: |
-| `/`         |      **71** |       **100** |        **100** | **100** | 0.0001755 |
-| `/projects` |      **93** |       **100** |        **100** | **100** |         0 |
-| `/careers`  |      **94** |       **100** |        **100** | **100** |         0 |
+| `/`         |      **82** |       **100** |        **100** | **100** | 0.0001755 |
+| `/projects` |      **87** |       **100** |        **100** | **100** |         0 |
+| `/careers`  |      **91** |       **100** |        **100** | **100** |         0 |
 
-Homepage performance runs were **40, 71 and 89**; Projects scored **94, 93 and 93**, and Careers scored **94, 91 and 96**. The early homepage audits overlapped the browser suite, so the local performance median includes resource contention. All routes scored **100** for accessibility, best practices and SEO in every run. All 36 browser tests passed against this production build.
+Homepage performance runs were **83, 71 and 82**; Projects scored **86, 89 and 87**, and Careers scored **91, 91 and 91**. These audits ran after the browser suite completed. All routes scored **100** for accessibility, best practices and SEO in every run. All 40 browser tests passed against this production build.
 
-The homepage remains below the advisory 90 performance target. Autoplay media and measured runner variance remain practical limits. Accessibility, best practices and SEO require at least 95; CLS must be at or below 0.1. These gates and audits were not weakened or disabled. Lighthouse completed with exit code 0 and cleaned up its owned browser and production-server processes.
+Home and Projects remain below the advisory 90 performance target. Autoplay media and measured runner variance remain practical limits. Accessibility, best practices and SEO require at least 95; CLS must be at or below 0.1. These gates and audits were not weakened or disabled. Lighthouse completed with exit code 0 and cleaned up its owned browser and production-server processes.
 
 Detailed HTML/JSON reports and `summary.json` are generated under the ignored `.lighthouseci/reports/` directory. Playwright writes its report to the ignored `playwright-report/` directory. GitHub Actions uploads both report directories as quality artifacts with 14-day retention.
 

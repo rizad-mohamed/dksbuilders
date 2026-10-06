@@ -8,8 +8,8 @@
   --line: #d9e5ed;
   --sans: var(--font-sans), Arial, sans-serif;
   --serif: var(--font-serif), Georgia, serif;
-  --radius: 5px;
-  --button-radius: 5px;
+  --radius: 11px;
+  --button-radius: 11px;
   --gutter: clamp(16px, 3vw, 64px);
   --motion-ease: cubic-bezier(0.22, 0.68, 0.24, 1);
 }
@@ -251,6 +251,14 @@ summary:focus-visible,
 .site-header .header-inner {
   width: 100%;
 }
+/* The homepage header floats above the full-viewport film. */
+body:has(.hero) .site-header {
+  position: fixed;
+  left: var(--gutter);
+  right: var(--gutter);
+  width: auto;
+  margin: 0;
+}
 .brand {
   display: flex;
   align-items: center;
@@ -291,9 +299,10 @@ summary:focus-visible,
 }
 .hero {
   position: relative;
-  min-height: 635px;
-  margin-top: 18px;
-  border-radius: var(--radius);
+  display: grid;
+  align-items: center;
+  width: 100%;
+  min-height: 100dvh;
   overflow: hidden;
   background: var(--navy);
   color: white;
@@ -329,7 +338,7 @@ summary:focus-visible,
     linear-gradient(0deg, #072838c9, transparent 60%);
 }
 .hero-copy {
-  padding: 70px 58px 135px;
+  padding: 140px 58px 150px;
   max-width: 900px;
   animation: hero-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -432,29 +441,6 @@ summary:focus-visible,
   gap: 8px;
   border-radius: var(--radius);
   backdrop-filter: blur(8px);
-}
-.hero-datum {
-  position: absolute;
-  right: 58px;
-  top: 65px;
-  display: flex;
-  align-items: center;
-  width: 250px;
-  opacity: 0.45;
-  font: 9px monospace;
-}
-.hero-datum span {
-  border: 1px solid #b8d9ed;
-  border-radius: 50%;
-  width: 22px;
-  height: 22px;
-  text-align: center;
-  padding-top: 4px;
-}
-.hero-datum i {
-  flex: 1;
-  height: 1px;
-  background: #b8d9ed;
 }
 .sector-strip {
   display: grid;
@@ -1014,6 +1000,9 @@ summary:focus-visible,
   border-block: 1px solid var(--line);
   background: #edf4f8;
 }
+#approach + .career-banner {
+  margin-top: clamp(40px, 6vw, 80px);
+}
 .process-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -1504,10 +1493,6 @@ summary:focus-visible,
     left: 40px;
     right: 40px;
   }
-  .hero-datum {
-    right: 40px;
-    width: 170px;
-  }
   .video-control {
     right: 40px;
   }
@@ -1598,13 +1583,8 @@ summary:focus-visible,
   #projects .project-intro {
     margin-left: 0;
   }
-  .hero {
-    min-height: 645px;
-    margin-top: 12px;
-    border-radius: var(--radius);
-  }
   .hero-copy {
-    padding: 45px 24px 190px;
+    padding: 115px 24px 145px;
   }
   .hero-copy .eyebrow {
     margin-bottom: 40px;
@@ -1641,9 +1621,6 @@ summary:focus-visible,
   }
   .hero-note > span {
     font-size: 8px;
-  }
-  .hero-datum {
-    display: none;
   }
   .hero-bottom {
     left: 24px;

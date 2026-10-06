@@ -6,7 +6,7 @@ Updated 6 October 2026. The current implementation uses Next.js App Router, Reac
 
 The palette preserves DKS blue (`#0074be`), deep navy (`#103448`), light technical surfaces and restrained engineering yellow (`#facb63`). DM Sans is the main display and interface font; Newsreader is limited to the Residential, Commercial and Infrastructure highlight titles. Both fonts are self-hosted through `next/font/local`.
 
-Primary containers and nested surfaces use 5px corners, and the floating glass navigation and mobile menu have square edges. Glass has a solid background fallback. Existing focus indicators, accessible navigation labels and mobile Escape behavior are preserved.
+Primary containers and nested surfaces use 11px corners, and the floating glass navigation and mobile menu have square edges. Glass has a solid background fallback. Existing focus indicators, accessible navigation labels and mobile Escape behavior are preserved.
 
 Headings remain left aligned above an asymmetric project gallery. The desktop career photograph sits left of its copy, and process steps sit left of their introduction. Mobile collapses these compositions into a clear reading order.
 
@@ -51,3 +51,5 @@ Server-rendered routes compose isolated client components for navigation, media 
 The project deploys as a Next.js application on a compatible host. GitHub Actions checks dependency advisories, lint, formatting, types, production builds, Playwright/axe and Lighthouse, and retains reports. The user has authorized committing and pushing the complete project to `rizad-mohamed/dksbuilders`. Source publication and website hosting are separate operations; no website deployment is included in this release.
 
 Page shells now use fluid gutters (16-64px), with no fixed maximum width around the entire site. Reading widths remain constrained locally. Selected Work headings align to the left gutter and the portfolio CTA uses the primary button treatment with a short arrow transition.
+
+The homepage film fills the viewport edge to edge using a 100dvh minimum height, with the glass header overlaid and no A/B/C datum graphic. Careers follows Our Approach with a fluid 40-80px gap. Very short viewports can grow the hero to preserve readable content and accessible controls.
